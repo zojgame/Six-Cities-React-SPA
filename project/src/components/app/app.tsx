@@ -49,6 +49,7 @@ function App(): JSX.Element {
               : <NotAuthPropertyPage />
           }
         />
+        <Route/>
       </Routes>
     </BrowserRouter>);
 }
