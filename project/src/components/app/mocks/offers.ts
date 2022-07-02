@@ -1,3 +1,5 @@
+// import { nanoid } from '@reduxjs/toolkit';
+
 export type Offer = {
   rating: number,
   name: string,
@@ -7,20 +9,24 @@ export type Offer = {
   isPremium : boolean,
   pictures : string[],
   isActive : boolean,
-  offerType : string
+  offerType : string,
+  id: string,
 };
 
 const offers : Offer[] = [
   {
-    rating: 4.8,
+    rating: 4.7,
     name: 'Beautiful & luxurious studio at great location',
-    price: 120,
+    price: 130,
     countBedrooms: 3,
     capacity: 4,
     isPremium: true,
-    pictures : ['/img/apartment-01.jpg'],
+    pictures : ['/img/apartment-01.jpg', 'img/room.jpg',
+      'img/apartment-02.jpg', 'img/apartment-03.jpg',
+      'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
-    offerType : 'Apartment'
+    offerType : 'Apartment',
+    id: '1',
   },
   {
     rating: 4.7,
@@ -31,7 +37,9 @@ const offers : Offer[] = [
     isPremium: false,
     pictures : ['/img/apartment-02.jpg'],
     isActive : false,
-    offerType : 'Apartment'
+    offerType : 'Apartment',
+    // id: nanoid(),
+    id: '2',
   },
   {
     rating: 4.9,
@@ -42,7 +50,9 @@ const offers : Offer[] = [
     isPremium: false,
     pictures : ['/img/apartment-03.jpg'],
     isActive : false,
-    offerType : 'Apartment'
+    offerType : 'Apartment',
+    // id: nanoid(),
+    id: '3',
   },
   {
     rating: 4.2,
@@ -53,7 +63,9 @@ const offers : Offer[] = [
     isPremium: true,
     pictures : ['/img/room.jpg'],
     isActive : false,
-    offerType : 'House'
+    offerType : 'House',
+    // id: nanoid(),
+    id: '4',
   }
 ];
 

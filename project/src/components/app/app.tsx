@@ -16,13 +16,13 @@ const Options = {
   CARDS_COUNT : 4,
 };
 
-function App({appartments} : AppScreenProps): JSX.Element {
+function App({appartments: apartments} : AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage cardsCount={Options.CARDS_COUNT} appartments={appartments} />}
+          element={<MainPage cardsCount={Options.CARDS_COUNT} appartments={apartments} />}
         />
         <Route
           path={AppRoute.Error}
@@ -38,15 +38,12 @@ function App({appartments} : AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesPage appartments={appartments}/>
+              <FavoritesPage appartments={apartments}/>
             </PrivateRoute>
           }
         />
-        <Route
-          path='/property'
-        >
-          <Route path=':num' element={<PropertyPage />}/>
-        </Route>
+
+        <Route path='/property/:num' element={<PropertyPage apartments={apartments}/>}/>
 
       </Routes>
     </BrowserRouter>);
