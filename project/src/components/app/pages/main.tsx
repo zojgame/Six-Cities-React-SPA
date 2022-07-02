@@ -1,16 +1,15 @@
-import CardElement from '../main-screen/card';
+// import CardElement from '../main-screen/card';
+import CardsListComponent from '../main-screen/card-list';
 import Logo from '../logo/logo';
+import {Offer} from '../mocks/offers';
 
 type MainScreenProps = {
   cardsCount : number;
+  appartments : Offer[];
+
 }
 
-function MainPage({cardsCount} : MainScreenProps):JSX.Element{
-  const cards = [];
-
-  for (let i = 0; i < cardsCount; i++){
-    cards.push(<CardElement />);
-  }
+function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -98,9 +97,7 @@ function MainPage({cardsCount} : MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {cards}
-              </div>
+              <CardsListComponent appartments={appartments}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -109,9 +106,8 @@ function MainPage({cardsCount} : MainScreenProps):JSX.Element{
         </div>
       </main>
     </div>
-
-
   );
 }
+
 
 export default MainPage;

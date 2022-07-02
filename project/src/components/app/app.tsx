@@ -5,22 +5,24 @@ import ErrorPage from './pages/error-page';
 import LoginPage from './pages/login-page';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import PropertyPage from './pages/property-page';
-// import PrivateRoute from './pages/private-route-page';
-import NotAuthPropertyPage from './pages/not-auth-property-page';
+// import NotAuthPropertyPage from './pages/not-auth-property-page';
 import PrivateRoute from './pages/private-route-page';
+import { Offer } from './mocks/offers';
 
-
+type AppScreenProps = {
+  appartments : Offer[]
+}
 const Options = {
   CARDS_COUNT : 4,
 };
 
-function App(): JSX.Element {
+function App({appartments} : AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage cardsCount={Options.CARDS_COUNT}/>}
+          element={<MainPage cardsCount={Options.CARDS_COUNT} appartments={appartments} />}
         />
         <Route
           path={AppRoute.Error}
@@ -34,22 +36,18 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NotAuth}
+              authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesPage />
+              <FavoritesPage appartments={appartments}/>
             </PrivateRoute>
           }
-
         />
         <Route
           path='/property'
-          element={
-            'AUTH' === AuthorizationStatus.Auth
-              ? <PropertyPage />
-              : <NotAuthPropertyPage />
-          }
-        />
-        <Route/>
+        >
+          <Route path=':num' element={<PropertyPage />}/>
+        </Route>
+
       </Routes>
     </BrowserRouter>);
 }
