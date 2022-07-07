@@ -11,6 +11,8 @@ export type Offer = {
   isActive : boolean,
   offerType : string,
   id: string,
+  y: number,
+  x: number
 };
 
 const offers : Offer[] = [
@@ -27,6 +29,8 @@ const offers : Offer[] = [
     isActive : false,
     offerType : 'Apartment',
     id: '1',
+    y: 52.3909553943508,
+    x: 4.85309666406198
   },
   {
     rating: 4.7,
@@ -40,6 +44,8 @@ const offers : Offer[] = [
     offerType : 'Apartment',
     // id: nanoid(),
     id: '2',
+    y: 52.369553943508,
+    x: 4.85309666406198
   },
   {
     rating: 4.9,
@@ -53,6 +59,8 @@ const offers : Offer[] = [
     offerType : 'Apartment',
     // id: nanoid(),
     id: '3',
+    y: 52.3909553943508,
+    x: 4.929309666406198
   },
   {
     rating: 4.2,
@@ -66,6 +74,8 @@ const offers : Offer[] = [
     offerType : 'House',
     // id: nanoid(),
     id: '4',
+    y: 52.3809553943508,
+    x: 4.939309666406198
   }
 ];
 
