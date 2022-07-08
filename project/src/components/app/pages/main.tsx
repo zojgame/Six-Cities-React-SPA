@@ -1,4 +1,5 @@
-// import CardElement from '../main-screen/card';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Map from '../components/map';
 import CardsListComponent from '../main-screen/card-list';
 import Logo from '../logo/logo';
 import {Offer} from '../mocks/offers';
@@ -100,7 +101,7 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
               <CardsListComponent appartments={appartments}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map"><Map points={appartments}/></section>
             </div>
           </div>
         </div>

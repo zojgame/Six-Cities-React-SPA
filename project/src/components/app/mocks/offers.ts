@@ -1,4 +1,4 @@
-// import { nanoid } from '@reduxjs/toolkit';
+import { MarkerType } from '../../const';
 
 export type Offer = {
   rating: number,
@@ -12,7 +12,8 @@ export type Offer = {
   offerType : string,
   id: string,
   y: number,
-  x: number
+  x: number,
+  markerType: string
 };
 
 const offers : Offer[] = [
@@ -30,7 +31,8 @@ const offers : Offer[] = [
     offerType : 'Apartment',
     id: '1',
     y: 52.3909553943508,
-    x: 4.85309666406198
+    x: 4.85309666406198,
+    markerType: MarkerType.CURRENT,
   },
   {
     rating: 4.7,
@@ -42,10 +44,10 @@ const offers : Offer[] = [
     pictures : ['/img/apartment-02.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    // id: nanoid(),
     id: '2',
     y: 52.369553943508,
-    x: 4.85309666406198
+    x: 4.85309666406198,
+    markerType: MarkerType.DEFAULT
   },
   {
     rating: 4.9,
@@ -57,10 +59,10 @@ const offers : Offer[] = [
     pictures : ['/img/apartment-03.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    // id: nanoid(),
     id: '3',
     y: 52.3909553943508,
-    x: 4.929309666406198
+    x: 4.929309666406198,
+    markerType: MarkerType.DEFAULT
   },
   {
     rating: 4.2,
@@ -72,10 +74,10 @@ const offers : Offer[] = [
     pictures : ['/img/room.jpg'],
     isActive : false,
     offerType : 'House',
-    // id: nanoid(),
     id: '4',
     y: 52.3809553943508,
-    x: 4.939309666406198
+    x: 4.939309666406198,
+    markerType: MarkerType.DEFAULT
   }
 ];
 

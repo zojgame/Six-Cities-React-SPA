@@ -8,6 +8,7 @@ import PropertyPage from './pages/property-page';
 // import NotAuthPropertyPage from './pages/not-auth-property-page';
 import PrivateRoute from './pages/private-route-page';
 import { Offer } from './mocks/offers';
+import Map from './components/map';
 
 type AppScreenProps = {
   appartments : Offer[]
@@ -42,8 +43,8 @@ function App({appartments: apartments} : AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-
         <Route path='/property/:num' element={<PropertyPage apartments={apartments}/>}/>
+        <Route path='/map' element={ <Map points={apartments}/> }/>
 
       </Routes>
     </BrowserRouter>);

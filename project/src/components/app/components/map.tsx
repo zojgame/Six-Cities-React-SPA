@@ -1,11 +1,21 @@
-// import { L } from 'leaflet';
-// import { Map } from "leaflet";
+import { MapContainer, TileLayer} from 'react-leaflet';
+import Markers from './markers';
+import { Offer } from '../mocks/offers';
+import {CITY} from '../mocks/cities';
 
-function Map():JSX.Element{
+type MapProps = {
+    points : Offer[]
+}
+
+function Map({points} : MapProps):JSX.Element{
   return (
-    <>
-            dsdf;
-    </>
+    <MapContainer center={CITY.position} zoom={12} scrollWheelZoom>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+      />
+      <Markers points={points}/>
+    </MapContainer>
   );
 }
 
