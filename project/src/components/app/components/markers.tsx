@@ -1,7 +1,8 @@
 import { Marker, Popup, } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import { URL_MARKER_DEFAULT, MarkerType, URL_MARKER_CURRENT} from '../../const';
-import { Offer } from '../mocks/offers';
+
+import Offer from '../../../types/offer';
 
 type MarkersProps = {
     points : Offer[],

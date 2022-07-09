@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useParams } from 'react-router-dom';
-import {Offer} from '../mocks/offers';
+import Offer from '../../../types/offer';
 import ErrorPage from './error-page';
-import CommentComponent from '../components/comment-form';
+import Reviews from '../components/reviews';
+import Map from '../components/map';
 
 type PropertyPageProps = {
   apartments : Offer[];
@@ -59,7 +61,6 @@ function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
             </div>
           </div>
         </header>
-
         <main className="page__main page__main--property" >
           <section className="property">
             <div className="property__gallery-container container">
@@ -162,38 +163,10 @@ function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
                     </p>
                   </div>
                 </div>
-                <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                  <ul className="reviews__list">
-                    <li className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                        Max
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: '80%'}}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                      </div>
-                    </li>
-                  </ul>
-
-                  <CommentComponent />
-                </section>
+                <Reviews offer={currentOffer[0]}/>
               </div>
             </div>
-            <section className="property__map map"></section>
+            <section className="property__map map"><Map points={apartments} /></section>
           </section>
           <div className="container">
             <section className="near-places places">

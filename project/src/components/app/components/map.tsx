@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer} from 'react-leaflet';
 import Markers from './markers';
-import { Offer } from '../mocks/offers';
+import Offer from '../../../types/offer';
 import {CITY} from '../mocks/cities';
 
 type MapProps = {

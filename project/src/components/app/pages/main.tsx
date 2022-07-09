@@ -2,12 +2,12 @@
 import Map from '../components/map';
 import CardsListComponent from '../main-screen/card-list';
 import Logo from '../logo/logo';
-import {Offer} from '../mocks/offers';
+import Offer from '../../../types/offer';
+
 
 type MainScreenProps = {
   cardsCount : number;
   appartments : Offer[];
-
 }
 
 function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{

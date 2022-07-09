@@ -1,5 +1,5 @@
 import Logo from '../logo/logo';
-import { Offer } from '../mocks/offers';
+import Offer from '../../../types/offer';
 import FavoriteCard from '../favorite-screen/favorite-card';
 
 type FavoriteProps = {

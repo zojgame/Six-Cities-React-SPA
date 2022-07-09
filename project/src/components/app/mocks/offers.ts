@@ -1,20 +1,6 @@
 import { MarkerType } from '../../const';
-
-export type Offer = {
-  rating: number,
-  name: string,
-  price: number,
-  countBedrooms: number,
-  capacity: number,
-  isPremium : boolean,
-  pictures : string[],
-  isActive : boolean,
-  offerType : string,
-  id: string,
-  y: number,
-  x: number,
-  markerType: string
-};
+import Offer from '../../../types/offer';
+import comments from './comments';
 
 const offers : Offer[] = [
   {
@@ -33,6 +19,7 @@ const offers : Offer[] = [
     y: 52.3909553943508,
     x: 4.85309666406198,
     markerType: MarkerType.CURRENT,
+    comments: [comments[0], comments[1]]
   },
   {
     rating: 4.7,
@@ -47,7 +34,8 @@ const offers : Offer[] = [
     id: '2',
     y: 52.369553943508,
     x: 4.85309666406198,
-    markerType: MarkerType.DEFAULT
+    markerType: MarkerType.DEFAULT,
+    comments: [comments[0], comments[1]]
   },
   {
     rating: 4.9,
@@ -62,7 +50,8 @@ const offers : Offer[] = [
     id: '3',
     y: 52.3909553943508,
     x: 4.929309666406198,
-    markerType: MarkerType.DEFAULT
+    markerType: MarkerType.DEFAULT,
+    comments: [comments[0], comments[1]]
   },
   {
     rating: 4.2,
@@ -77,7 +66,8 @@ const offers : Offer[] = [
     id: '4',
     y: 52.3809553943508,
     x: 4.939309666406198,
-    markerType: MarkerType.DEFAULT
+    markerType: MarkerType.DEFAULT,
+    comments: [comments[1]]
   }
 ];
 

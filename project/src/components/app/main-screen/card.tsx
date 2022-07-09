@@ -1,4 +1,4 @@
-import { Offer } from '../mocks/offers';
+import Offer from '../../../types/offer';
 
 type CardProps = {
   appartment : Offer

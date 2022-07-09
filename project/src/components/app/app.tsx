@@ -7,7 +7,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import PropertyPage from './pages/property-page';
 // import NotAuthPropertyPage from './pages/not-auth-property-page';
 import PrivateRoute from './pages/private-route-page';
-import { Offer } from './mocks/offers';
+import Offer from '../../types/offer';
 import Map from './components/map';
 
 type AppScreenProps = {
