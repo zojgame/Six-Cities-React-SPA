@@ -6,8 +6,11 @@ import Logo from '../logo/logo';
 import Offer from '../../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import { changeCity, fillRentList } from '../../../store/action';
-import { londonOffers } from '../mocks/offers';
-import { useSelector } from 'react-redux';
+import { offers } from '../mocks/offers';
+import { ApiDispatch } from '../../../store/state';
+// import { useSelector } from 'react-redux';
+// import { off } from 'process';
+// import CityTabComponent from '../main-screen/city-tab';
 
 
 type MainScreenProps = {
@@ -17,8 +20,9 @@ type MainScreenProps = {
 
 function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
   const dispatch = useAppDispatch();
-  const city = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offersList);
+  // const city = useAppSelector((state) => state.city);
+  const {city, offersList} = useAppSelector((state) => state);
+  // const offers = useAppSelector((state) => state.offersList);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -54,42 +58,80 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
           <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
+                <a className={`locations__item-link tabs__item ${ city === 'Paris' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      SwitchCity('Paris', dispatch);
+                      SwitchOffers('Paris', dispatch);
+                    }
+                  }
+                >
                   <span>Paris</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
+                <a className={`locations__item-link tabs__item ${ city === 'Cologne' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      SwitchCity('Cologne', dispatch);
+                      SwitchOffers('Cologne', dispatch);
+                    }
+                  }
+                >
                   <span>Cologne</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
+                <a className={`locations__item-link tabs__item ${ city === 'Brussels' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      SwitchCity('Brussels', dispatch);
+                      SwitchOffers('Brussels', dispatch);
+                    }
+                  }
+                >
                   <span>Brussels</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="http://localhost:3000">
+                <a className={`locations__item-link tabs__item ${ city === 'Amsterdam' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      SwitchCity('Amsterdam', dispatch);
+                      SwitchOffers('Amsterdam', dispatch);
+                    }
+                  }
+                >
                   <span>Amsterdam</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000"
+                <a className={`locations__item-link tabs__item ${ city === 'Hamburg' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
                   onClick={
                     (evt) => {
                       evt.preventDefault();
-                      dispatch(changeCity('Hamburg'));
-                      dispatch(fillRentList(londonOffers));
-                      console.log(offers);
+                      SwitchCity('Hamburg', dispatch);
+                      SwitchOffers('Hamburg', dispatch);
                     }
                   }
                 >
-
                   <span>Hamburg</span>
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
+                <a className={`locations__item-link tabs__item ${ city === 'Dusseldorf' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      SwitchCity('Dusseldorf', dispatch);
+                      SwitchOffers('Dusseldorf', dispatch);
+                    }
+                  }
+                >
                   <span>Dusseldorf</span>
                 </a>
               </li>
@@ -116,7 +158,7 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardsListComponent appartments={ offers }/>
+              <CardsListComponent appartments={ offersList }/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"><Map points={appartments}/></section>
@@ -128,5 +170,14 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
   );
 }
 
+function SwitchCity(city: string, dispatch: ApiDispatch):void{
+  dispatch(changeCity(city));
+}
+
+
+function SwitchOffers(city: string, dispatch: ApiDispatch){
+  const updatedOffers = offers[city];
+  dispatch(fillRentList(updatedOffers));
+}
 
 export default MainPage;
