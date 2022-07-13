@@ -5,6 +5,7 @@ import ErrorPage from './error-page';
 import Reviews from '../components/reviews';
 import Map from '../components/map';
 
+
 type PropertyPageProps = {
   apartments : Offer[];
 }

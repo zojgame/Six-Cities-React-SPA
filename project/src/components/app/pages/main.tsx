@@ -1,8 +1,13 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Map from '../components/map';
 import CardsListComponent from '../main-screen/card-list';
 import Logo from '../logo/logo';
 import Offer from '../../../types/offer';
+import {useAppDispatch, useAppSelector} from '../../../hooks/index';
+import { changeCity, fillRentList } from '../../../store/action';
+import { londonOffers } from '../mocks/offers';
+import { useSelector } from 'react-redux';
 
 
 type MainScreenProps = {
@@ -11,6 +16,9 @@ type MainScreenProps = {
 }
 
 function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
+  const dispatch = useAppDispatch();
+  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offersList);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -66,7 +74,17 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
                 </a>
               </li>
               <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
+                <a className="locations__item-link tabs__item" href="http://localhost:3000"
+                  onClick={
+                    (evt) => {
+                      evt.preventDefault();
+                      dispatch(changeCity('Hamburg'));
+                      dispatch(fillRentList(londonOffers));
+                      console.log(offers);
+                    }
+                  }
+                >
+
                   <span>Hamburg</span>
                 </a>
               </li>
@@ -98,7 +116,7 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardsListComponent appartments={appartments}/>
+              <CardsListComponent appartments={ offers }/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"><Map points={appartments}/></section>

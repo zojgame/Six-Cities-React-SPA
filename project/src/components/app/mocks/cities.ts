@@ -1,6 +1,6 @@
 import City from '../../../types/city';
 
-export const CITY: City = {
+export const CURRENT_CITY: City = {
   title: 'Амстердам',
   y: 52.3909553943508,
   x: 4.90309666406198,
@@ -8,4 +8,4 @@ export const CITY: City = {
   position: [52.3909553943508, 4.90309666406198]
 };
 
-export default CITY;
+export default CURRENT_CITY;
