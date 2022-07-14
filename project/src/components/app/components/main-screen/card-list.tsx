@@ -1,5 +1,5 @@
 import CardElement from './card';
-import { Offer } from '../mocks/offers';
+import Offer from '../../../../types/offer';
 
 type CardsListProps = {
     appartments : Offer[];

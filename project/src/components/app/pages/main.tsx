@@ -1,15 +1,29 @@
-// import CardElement from '../main-screen/card';
-import CardsListComponent from '../main-screen/card-list';
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import Map from '../components/map';
+import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
-import {Offer} from '../mocks/offers';
+import Offer from '../../../types/offer';
+import {useAppDispatch, useAppSelector} from '../../../hooks/index';
+import { changeCity, fillRentList } from '../../../store/action';
+import { offers } from '../mocks/offers';
+import { ApiDispatch } from '../../../store/state';
+import CitiesList from '../components/main-screen/cities-list';
+import { useState } from 'react';
+// import { useSelector } from 'react-redux';
+// import { off } from 'process';
+// import CityTabComponent from '../main-screen/city-tab';
+
 
 type MainScreenProps = {
   cardsCount : number;
   appartments : Offer[];
-
 }
 
 function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
+  const dispatch = useAppDispatch();
+  const {city, offersList} = useAppSelector((state) => state);
+  const [currentCity, switchCity] = useState('Amsterdam');
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -41,47 +55,14 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="http://localhost:3000">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="http://localhost:3000">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList city={city} dispatch={dispatch} switchCity={switchCity}/>
+          {/* <CitiesList city={city} dispatch={dispatch} /> */}
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers[city].length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -97,10 +78,13 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <CardsListComponent appartments={appartments}/>
+              <CardsListComponent appartments={ offersList }/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={city} points={offersList}/>
+                {/* <Map city={currentCity} points={offersList}/> */}
+              </section>
             </div>
           </div>
         </div>
@@ -108,6 +92,5 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
     </div>
   );
 }
-
 
 export default MainPage;

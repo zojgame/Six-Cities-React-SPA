@@ -5,9 +5,9 @@ import ErrorPage from './pages/error-page';
 import LoginPage from './pages/login-page';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import PropertyPage from './pages/property-page';
-// import NotAuthPropertyPage from './pages/not-auth-property-page';
 import PrivateRoute from './pages/private-route-page';
-import { Offer } from './mocks/offers';
+import Offer from '../../types/offer';
+import Map from './components/map';
 
 type AppScreenProps = {
   appartments : Offer[]
@@ -42,8 +42,8 @@ function App({appartments: apartments} : AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-
         <Route path='/property/:num' element={<PropertyPage apartments={apartments}/>}/>
+        <Route path='/map' element={ <Map city={'Amsterdam'} points={apartments}/> }/>
 
       </Routes>
     </BrowserRouter>);

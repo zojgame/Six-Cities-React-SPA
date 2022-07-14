@@ -1,4 +1,4 @@
-import { Offer } from '../mocks/offers';
+import Offer from '../../../../types/offer';
 
 type CardProps = {
   appartment : Offer
@@ -35,7 +35,7 @@ function CardElement({appartment} : CardProps):JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#icon-bookmark">{appartment.name}</a>
+          <a href={`property/${appartment.id}`}>{appartment.name}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
