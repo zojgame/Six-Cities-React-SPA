@@ -169,7 +169,7 @@ function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
                 <Reviews offer={currentOffer[0]}/>
               </div>
             </div>
-            <section className="property__map map"><Map points={nearestApartments} /></section>
+            <section className="property__map map"><Map city={'Amsterdam'} points={nearestApartments} /></section>
           </section>
           <div className="container">
             <section className="near-places places">

@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {amsterdamOffers} from '../components/app/mocks/offers';
 import { changeCity, fillRentList } from './action';
-// import Offer from '../types/offer';
 
 const initialState = {
   city: 'Amsterdam',
@@ -17,15 +16,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.offersList = action.payload;
     });
 });
-
-// function GetOffers(city: string):Offer[]{
-//   switch(city){
-//     case 'Amsterdam':
-//       return amsterdamOffers;
-//     default:
-//       return londonOffers;
-//   }
-// }
 
 export {reducer};
 

@@ -1,13 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Map from '../components/map';
-import CardsListComponent from '../main-screen/card-list';
+import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
 import Offer from '../../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import { changeCity, fillRentList } from '../../../store/action';
 import { offers } from '../mocks/offers';
 import { ApiDispatch } from '../../../store/state';
+import CitiesList from '../components/main-screen/cities-list';
+import { useState } from 'react';
 // import { useSelector } from 'react-redux';
 // import { off } from 'process';
 // import CityTabComponent from '../main-screen/city-tab';
@@ -20,9 +22,8 @@ type MainScreenProps = {
 
 function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
   const dispatch = useAppDispatch();
-  // const city = useAppSelector((state) => state.city);
   const {city, offersList} = useAppSelector((state) => state);
-  // const offers = useAppSelector((state) => state.offersList);
+  const [currentCity, switchCity] = useState('Amsterdam');
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -54,95 +55,14 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Paris' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Paris', dispatch);
-                      SwitchOffers('Paris', dispatch);
-                    }
-                  }
-                >
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Cologne' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Cologne', dispatch);
-                      SwitchOffers('Cologne', dispatch);
-                    }
-                  }
-                >
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Brussels' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Brussels', dispatch);
-                      SwitchOffers('Brussels', dispatch);
-                    }
-                  }
-                >
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Amsterdam' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Amsterdam', dispatch);
-                      SwitchOffers('Amsterdam', dispatch);
-                    }
-                  }
-                >
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Hamburg' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Hamburg', dispatch);
-                      SwitchOffers('Hamburg', dispatch);
-                    }
-                  }
-                >
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className={`locations__item-link tabs__item ${ city === 'Dusseldorf' ? 'tabs__item--active' : ''}`} href="http://localhost:3000"
-                  onClick={
-                    (evt) => {
-                      evt.preventDefault();
-                      SwitchCity('Dusseldorf', dispatch);
-                      SwitchOffers('Dusseldorf', dispatch);
-                    }
-                  }
-                >
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList city={city} dispatch={dispatch} switchCity={switchCity}/>
+          {/* <CitiesList city={city} dispatch={dispatch} /> */}
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers[city].length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -161,23 +81,16 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
               <CardsListComponent appartments={ offersList }/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"><Map points={appartments}/></section>
+              <section className="cities__map map">
+                <Map city={city} points={offersList}/>
+                {/* <Map city={currentCity} points={offersList}/> */}
+              </section>
             </div>
           </div>
         </div>
       </main>
     </div>
   );
-}
-
-function SwitchCity(city: string, dispatch: ApiDispatch):void{
-  dispatch(changeCity(city));
-}
-
-
-function SwitchOffers(city: string, dispatch: ApiDispatch){
-  const updatedOffers = offers[city];
-  dispatch(fillRentList(updatedOffers));
 }
 
 export default MainPage;
