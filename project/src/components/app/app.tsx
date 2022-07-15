@@ -8,21 +8,26 @@ import PropertyPage from './pages/property-page';
 import PrivateRoute from './pages/private-route-page';
 import Offer from '../../types/offer';
 import Map from './components/map';
+// import {useAppSelector} from '../../hooks/index';
+// import { useSelector } from 'react-redux';
 
 type AppScreenProps = {
   appartments : Offer[]
 }
-const Options = {
-  CARDS_COUNT : 4,
-};
+// const Options = {
+//   CARDS_COUNT : 4,
+// };
 
 function App({appartments: apartments} : AppScreenProps): JSX.Element {
+  // const {offersList} = useAppSelector((state) => state);
+  // const {offersList} = useSelector((state) => state.offersList);
+  // const offersList = useSelector((state) => state.offersList);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage cardsCount={Options.CARDS_COUNT} appartments={apartments} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Error}
@@ -42,9 +47,8 @@ function App({appartments: apartments} : AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path='/property/:num' element={<PropertyPage apartments={apartments}/>}/>
+        <Route path='/property/:id/:city' element={<PropertyPage />}/>
         <Route path='/map' element={ <Map city={'Amsterdam'} points={apartments}/> }/>
-
       </Routes>
     </BrowserRouter>);
 }

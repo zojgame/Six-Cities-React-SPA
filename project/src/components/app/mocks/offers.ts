@@ -19,7 +19,8 @@ const amsterdamOffers : Offer[] = [
     y: 52.3909553943508,
     x: 4.85309666406198,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'amsterdam'
   },
   {
     rating: 4.7,
@@ -35,7 +36,8 @@ const amsterdamOffers : Offer[] = [
     y: 52.369553943508,
     x: 4.85309666406198,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'amsterdam'
   },
   {
     rating: 4.9,
@@ -51,7 +53,8 @@ const amsterdamOffers : Offer[] = [
     y: 52.3909553943508,
     x: 4.929309666406198,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'amsterdam'
   },
   {
     rating: 4.2,
@@ -67,7 +70,8 @@ const amsterdamOffers : Offer[] = [
     y: 52.3809553943508,
     x: 4.939309666406198,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[1]]
+    comments: [comments[1]],
+    city: 'amsterdam'
   }
 ];
 
@@ -84,11 +88,12 @@ const hamburgOffers : Offer[] = [
       'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '1',
+    id: '5',
     y: 53.5753200100,
     x: 10.0153400100,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'hamburg'
   },
   {
     rating: 4.7,
@@ -100,11 +105,12 @@ const hamburgOffers : Offer[] = [
     pictures : ['/img/apartment-03.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '2',
+    id: '6',
     y: 53.5558210800,
     x: 10.0168410800,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'hamburg'
   },
   {
     rating: 4.9,
@@ -116,11 +122,12 @@ const hamburgOffers : Offer[] = [
     pictures : ['/img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '3',
+    id: '7',
     y: 53.5758210800,
     x: 10.0568410800,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'hamburg'
   },
 ];
 
@@ -137,11 +144,12 @@ const dusseldorfOffers : Offer[] = [
       'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '1',
+    id: '8',
     y: 51.2217,
     x: 6.77616,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'dusseldorf'
   },
 ];
 
@@ -158,11 +166,12 @@ const brusselsOffers : Offer[] = [
       'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '1',
+    id: '9',
     y: 50.850339600012,
     x: 4.3517103000012,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'brussels'
   },
   {
     rating: 4.7,
@@ -174,11 +183,12 @@ const brusselsOffers : Offer[] = [
     pictures : ['/img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '2',
+    id: '10',
     y: 50.883339501113,
     x: 4.3520103001113,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'brussels'
   },
 ];
 
@@ -195,11 +205,12 @@ const cologneOffers : Offer[] = [
       'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '1',
+    id: '11',
     y: 45.5786200,
     x: 9.9418000,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'brussels'
   },
   {
     rating: 4.7,
@@ -211,11 +222,12 @@ const cologneOffers : Offer[] = [
     pictures : ['/img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '2',
+    id: '12',
     y: 45.5756200,
     x: 9.9411000,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'brussels'
   },
 ];
 
@@ -232,11 +244,12 @@ const parisOffers : Offer[] = [
       'img/studio-01.jpg', 'img/apartment-01.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '1',
+    id: '13',
     y: 48.8834100,
     x: 2.3888000,
     markerType: MarkerType.CURRENT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'paris'
   },
   {
     rating: 4.7,
@@ -248,11 +261,12 @@ const parisOffers : Offer[] = [
     pictures : ['/img/apartment-02.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '2',
+    id: '14',
     y: 48.9334100,
     x: 2.4088000,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'paris'
   },
   {
     rating: 4.9,
@@ -264,11 +278,12 @@ const parisOffers : Offer[] = [
     pictures : ['/img/apartment-03.jpg'],
     isActive : false,
     offerType : 'Apartment',
-    id: '3',
+    id: '15',
     y: 48.7934100,
     x: 2.4288000,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]]
+    comments: [comments[0], comments[1]],
+    city: 'paris'
   },
   {
     rating: 4.2,
@@ -280,11 +295,12 @@ const parisOffers : Offer[] = [
     pictures : ['/img/room.jpg'],
     isActive : false,
     offerType : 'House',
-    id: '4',
+    id: '16',
     y: 48.8534100,
     x: 2.2588000,
     markerType: MarkerType.DEFAULT,
-    comments: [comments[1]]
+    comments: [comments[1]],
+    city: 'paris'
   }
 ];
 
@@ -296,7 +312,14 @@ const offers : { [key : string]: Offer[]} =
   'Dusseldorf' : dusseldorfOffers,
   'Brussels' : brusselsOffers,
   'Cologne' : cologneOffers,
-  'Paris' : parisOffers
+  'Paris' : parisOffers,
+
+  'amsterdam' : amsterdamOffers,
+  'hamburg' : hamburgOffers,
+  'dusseldorf' : dusseldorfOffers,
+  'brussels' : brusselsOffers,
+  'cologne' : cologneOffers,
+  'paris' : parisOffers
 };
 
 export {amsterdamOffers};

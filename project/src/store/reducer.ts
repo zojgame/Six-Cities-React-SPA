@@ -14,6 +14,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fillRentList, (state, action) => {
       state.offersList = action.payload;
+
     });
 });
 

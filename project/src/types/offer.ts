@@ -14,7 +14,8 @@ import Comment from './comment';
     y: number,
     x: number,
     markerType: string,
-    comments: Comment[]
+    comments: Comment[],
+    city: string
   };
 
 export default Offer;

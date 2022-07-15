@@ -5,25 +5,18 @@ import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
 import Offer from '../../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
-import { changeCity, fillRentList } from '../../../store/action';
 import { offers } from '../mocks/offers';
-import { ApiDispatch } from '../../../store/state';
+// import { ApiDispatch } from '../../../store/state';
 import CitiesList from '../components/main-screen/cities-list';
-import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { off } from 'process';
-// import CityTabComponent from '../main-screen/city-tab';
 
 
-type MainScreenProps = {
-  cardsCount : number;
-  appartments : Offer[];
-}
+// type MainScreenProps = {
+//   cardsCount : number;
+// }
 
-function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
+function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
   const {city, offersList} = useAppSelector((state) => state);
-  const [currentCity, switchCity] = useState('Amsterdam');
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -55,8 +48,7 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList city={city} dispatch={dispatch} switchCity={switchCity}/>
-          {/* <CitiesList city={city} dispatch={dispatch} /> */}
+          <CitiesList city={ city } dispatch={dispatch} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -83,7 +75,6 @@ function MainPage({cardsCount, appartments} : MainScreenProps):JSX.Element{
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map city={city} points={offersList}/>
-                {/* <Map city={currentCity} points={offersList}/> */}
               </section>
             </div>
           </div>

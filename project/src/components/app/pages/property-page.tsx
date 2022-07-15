@@ -1,30 +1,31 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useParams } from 'react-router-dom';
 import Offer from '../../../types/offer';
 import ErrorPage from './error-page';
 import Reviews from '../components/reviews';
 import Map from '../components/map';
+import { offers } from '../mocks/offers';
 
-
-type PropertyPageProps = {
-  apartments : Offer[];
+type Params = {
+  id: string,
+  city: string
 }
 
-function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
-  const { num } = useParams();
+function PropertyPage():JSX.Element {
+  const { id, city } = useParams<keyof Params>() as Params;
+  const offersList = offers[city];
+  const firstLetterUpperCase = city[0].toUpperCase() + city.slice(1);
 
-  const currentOffer = apartments.filter((offer) => (offer.id === num));
+  const currentOffer = offersList.filter((offer) => (offer.id === id));
   if(currentOffer.length === 0){
     return (<ErrorPage />);
   }
 
-  const nearestApartments = apartments.filter((offer) => (offer.id !== num));
+  const nearestApartments = offersList.filter((offer) => (offer.id !== id));
   const otherPlaces = nearestApartments.map((apartment) => (OtherApartment(apartment)));
 
   const photos = currentOffer[0].pictures.map((pic) =>
     (
-      // eslint-disable-next-line react/jsx-key
-      <div className="property__image-wrapper">
+      <div className="property__image-wrapper" key={pic}>
         <img className="property__image" src={pic} alt="studio" />
       </div>
     ));
@@ -56,7 +57,7 @@ function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
                   </li>
                   <li className="header__nav-item">
                     <a className="header__nav-link" href="#tag">
-                      <span className="header__signout">Sign out{num}</span>
+                      <span className="header__signout">Sign out{id}</span>
                     </a>
                   </li>
                 </ul>
@@ -169,7 +170,9 @@ function PropertyPage({apartments} : PropertyPageProps):JSX.Element {
                 <Reviews offer={currentOffer[0]}/>
               </div>
             </div>
-            <section className="property__map map"><Map city={'Amsterdam'} points={nearestApartments} /></section>
+            <section className="property__map map">
+              <Map city={`${firstLetterUpperCase}`} points={nearestApartments} />
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">
