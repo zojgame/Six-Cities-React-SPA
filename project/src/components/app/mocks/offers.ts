@@ -4,7 +4,7 @@ import comments from './comments';
 
 const amsterdamOffers : Offer[] = [
   {
-    rating: 4.7,
+    rating: 1,
     name: 'Beautiful & luxurious studio at great location',
     price: 130,
     countBedrooms: 3,
