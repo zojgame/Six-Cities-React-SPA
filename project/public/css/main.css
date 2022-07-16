@@ -9,3 +9,9 @@
 .property__map{
     padding: 0 10%;
 }
+
+.places__sorting > section{
+    display: inline-block;
+    padding-right: 5%;
+    padding-bottom: 2%;
+}

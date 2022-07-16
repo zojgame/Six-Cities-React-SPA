@@ -6,6 +6,13 @@ export enum AppRoute {
     Error = '/*'
 }
 
+export enum SortOptions {
+  POPULAR = 'POPULAR',
+  PRICE_LOW_TO_HIGH = 'PRICE_LOW_TO_HIGH',
+  PRICE_HIGH_TO_LOW = 'PRICE_HIGH_TO_LOW',
+  TOP_RATED_FIRST = 'TOP_RATED_FIRST'
+}
+
 export enum AuthorizationStatus {
     Auth = 'AUTH',
     NotAuth = 'NOT_AUTH',

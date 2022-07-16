@@ -3,20 +3,16 @@
 import Map from '../components/map';
 import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
-import Offer from '../../../types/offer';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import { offers } from '../mocks/offers';
-// import { ApiDispatch } from '../../../store/state';
 import CitiesList from '../components/main-screen/cities-list';
+import OptionSortComponent from '../components/main-screen/option-sort';
 
-
-// type MainScreenProps = {
-//   cardsCount : number;
-// }
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
   const {city, offersList} = useAppSelector((state) => state);
+  // setOnMouseOverOptions();
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -55,7 +51,7 @@ function MainPage():JSX.Element{
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers[city].length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
+              {/* <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
@@ -69,7 +65,8 @@ function MainPage():JSX.Element{
                   <li className="places__option" tabIndex={0}>Price: high to low</li>
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
-              </form>
+              </form> */}
+              <OptionSortComponent />
               <CardsListComponent appartments={ offersList }/>
             </section>
             <div className="cities__right-section">
@@ -83,5 +80,6 @@ function MainPage():JSX.Element{
     </div>
   );
 }
+
 
 export default MainPage;
