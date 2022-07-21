@@ -16,6 +16,6 @@
     padding-bottom: 2%;
 }
 
-.place-card:hover{
-    cursor: pointer ;
+.place-card, .place-card:hover{
+    cursor: pointer;
 }
