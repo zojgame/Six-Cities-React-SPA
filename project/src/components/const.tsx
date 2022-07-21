@@ -14,16 +14,6 @@ export enum SortOptions {
   TOP_RATED_FIRST = 'TOP_RATED_FIRST'
 }
 
-// export const sortBy : {
-//   [sortType:string] : (cards: Offer[]) => Offer[]
-// } = {
-//   [SortOptions.POPULAR]: (cards : Offer[]) => cards.filter(() => true),
-//   // [SortOptions.PRICE_HIGH_TO_LOW]: (cards: Offer[]) => cards.filter((card) => card.price),
-//   [SortOptions.PRICE_HIGH_TO_LOW]: (cards: Offer[]) => ),
-//   [SortOptions.PRICE_LOW_TO_HIGH]: (cards: Offer[]) => cards.filter((card) => card.price),
-//   [SortOptions.TOP_RATED_FIRST]: (cards: Offer[]) => cards.filter((card) => card.rating)
-// };
-
 export const sortBy : {
   [sort:string] : (cardA: Offer, cardB: Offer) => number,
 
@@ -33,7 +23,6 @@ export const sortBy : {
   [SortOptions.PRICE_LOW_TO_HIGH]: (cardA : Offer, cardB : Offer) => cardA.price - cardB.price,
   [SortOptions.TOP_RATED_FIRST]: (cardA : Offer, cardB : Offer) => cardB.rating - cardA.rating
 };
-// [SortOptions.PRICE_HIGH_TO_LOW]: (cards: Offer[]) => cards.filter((card) => card.price),
 
 export enum AuthorizationStatus {
     Auth = 'AUTH',

@@ -9,7 +9,7 @@ const OptionSortComponent = () => {
   const { sortType, offersList } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [isFormOpened, setForm] = useState(false);
-  const setFormOpened = (e: MouseEvent) => {//
+  const setFormOpened = (e: MouseEvent) => {
     e.preventDefault();
     setForm(true);
   };

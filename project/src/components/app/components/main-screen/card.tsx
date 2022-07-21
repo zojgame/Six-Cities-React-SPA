@@ -1,11 +1,44 @@
+/* eslint-disable no-console */
 import Offer from '../../../../types/offer';
+import {MouseEvent} from 'react';
+import {useAppDispatch, useAppSelector} from '../../../../hooks/index';
+import {MarkerType} from '../../../const';
+import { fillRentList } from '../../../../store/action';
+// import {sortBy} from '../../../const';
 
 type CardProps = {
   appartment : Offer
 }
+
+function SortCards(currentAppartment : Offer, offers : Offer[], index : number){
+  const newApartment = [...offers.slice(0, index), currentAppartment, ...offers.slice(index + 1)];
+  return newApartment;
+}
+
 function CardElement({appartment} : CardProps):JSX.Element{
+  const dispatch = useAppDispatch();
+  const {offersList} = useAppSelector((state) => state);
+
+
+  const currentAppartment = [...offersList].filter((offer) => offer.id === appartment.id)[0];
+  const index = offersList.indexOf(currentAppartment);
+  const updatedApartment = {...currentAppartment, markerType: MarkerType.CURRENT};
+  const initialApartment = {...currentAppartment, markerType: MarkerType.DEFAULT};
+  const sortedOffers = SortCards(updatedApartment, offersList, index);
+  const initialState = SortCards(initialApartment, offersList, index);
+  const mouseHolding = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(fillRentList([...sortedOffers]));
+  };
+  const mouseLeave = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(fillRentList([...initialState]));
+    console.log(offersList);
+  };
   return(
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card"
+      onMouseOver={mouseHolding} onMouseOut={mouseLeave}
+    >
       <div className={appartment.isPremium ? 'visually-hidden' : 'place-card__mark'}>
 
         <span>Premium</span>

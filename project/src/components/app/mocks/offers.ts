@@ -1,6 +1,8 @@
 import { MarkerType } from '../../const';
 import Offer from '../../../types/offer';
 import comments from './comments';
+import { sortBy } from '../../const';
+import { SortOptions } from '../../const';
 
 const amsterdamOffers : Offer[] = [
   {
@@ -18,7 +20,7 @@ const amsterdamOffers : Offer[] = [
     id: '1',
     y: 52.3909553943508,
     x: 4.85309666406198,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'amsterdam'
   },
@@ -73,7 +75,7 @@ const amsterdamOffers : Offer[] = [
     comments: [comments[1]],
     city: 'amsterdam'
   }
-];
+].sort(sortBy[SortOptions.POPULAR]);
 
 const hamburgOffers : Offer[] = [
   {
@@ -91,7 +93,7 @@ const hamburgOffers : Offer[] = [
     id: '5',
     y: 53.5753200100,
     x: 10.0153400100,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'hamburg'
   },
@@ -129,7 +131,7 @@ const hamburgOffers : Offer[] = [
     comments: [comments[0], comments[1]],
     city: 'hamburg'
   },
-];
+].sort(sortBy[SortOptions.POPULAR]);
 
 const dusseldorfOffers : Offer[] = [
   {
@@ -147,11 +149,11 @@ const dusseldorfOffers : Offer[] = [
     id: '8',
     y: 51.2217,
     x: 6.77616,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'dusseldorf'
   },
-];
+].sort(sortBy[SortOptions.POPULAR]);
 
 const brusselsOffers : Offer[] = [
   {
@@ -169,7 +171,7 @@ const brusselsOffers : Offer[] = [
     id: '9',
     y: 50.850339600012,
     x: 4.3517103000012,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'brussels'
   },
@@ -190,7 +192,7 @@ const brusselsOffers : Offer[] = [
     comments: [comments[0], comments[1]],
     city: 'brussels'
   },
-];
+].sort(sortBy[SortOptions.POPULAR]);
 
 const cologneOffers : Offer[] = [
   {
@@ -208,7 +210,7 @@ const cologneOffers : Offer[] = [
     id: '11',
     y: 45.5786200,
     x: 9.9418000,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'brussels'
   },
@@ -247,7 +249,7 @@ const parisOffers : Offer[] = [
     id: '13',
     y: 48.8834100,
     x: 2.3888000,
-    markerType: MarkerType.CURRENT,
+    markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
     city: 'paris'
   },

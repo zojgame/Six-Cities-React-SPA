@@ -12,7 +12,6 @@ type MapProps = {
 function Map({points, city} : MapProps):JSX.Element{
   const newCity = CitiesPosition[city];
   return (
-    // <MapContainer center={CitiesPosition[city]} zoom={12} scrollWheelZoom>
     <MapContainer center={newCity.position} zoom={newCity.zoom} scrollWheelZoom>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
