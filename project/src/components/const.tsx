@@ -24,6 +24,16 @@ export const sortBy : {
   [SortOptions.TOP_RATED_FIRST]: (cardA : Offer, cardB : Offer) => cardB.rating - cardA.rating
 };
 
+export const currentWordSortBy : {
+  [sort:string] : string,
+
+} = {
+  [SortOptions.POPULAR]: 'Popular',
+  [SortOptions.PRICE_HIGH_TO_LOW]: 'Price: high to low',
+  [SortOptions.PRICE_LOW_TO_HIGH]: 'Price: low to high',
+  [SortOptions.TOP_RATED_FIRST]: 'Top rated first'
+};
+
 export enum AuthorizationStatus {
     Auth = 'AUTH',
     NotAuth = 'NOT_AUTH',

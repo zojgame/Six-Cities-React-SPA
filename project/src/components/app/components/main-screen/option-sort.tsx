@@ -1,12 +1,11 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEvent, useState } from 'react';
-import { changeSortType, fillRentList } from '../../../../store/action';
+import { changeSortType } from '../../../../store/action';
 import { SortOptions } from '../../../const';
 import { useAppDispatch, useAppSelector} from '../../../../hooks';
+import { currentWordSortBy } from '../../../const';
 
 const OptionSortComponent = () => {
-  const { sortType, offersList } = useAppSelector((state) => state);
+  const { sortType } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [isFormOpened, setForm] = useState(false);
   const setFormOpened = (e: MouseEvent) => {
@@ -44,7 +43,7 @@ const OptionSortComponent = () => {
       <section onMouseOver={setFormOpened} onMouseOut={setFormClosed}>
         <span className="places__sorting-caption" >Sort by </span>
         <span className="places__sorting-type" tabIndex={0} >
-                     Popular
+          {currentWordSortBy[sortType]}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use href="#icon-arrow-select"></use>
           </svg>
