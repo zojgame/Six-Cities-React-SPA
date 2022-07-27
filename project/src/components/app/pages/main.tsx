@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Map from '../components/map';
 import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
@@ -10,7 +8,7 @@ import OptionSortComponent from '../components/main-screen/option-sort';
 
 
 function MainPage():JSX.Element{
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();//
   const {city, offersList} = useAppSelector((state) => state);
   return (
     <div className="page page--gray page--main">

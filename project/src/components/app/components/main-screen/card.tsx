@@ -1,13 +1,11 @@
-/* eslint-disable no-console */
-import Offer from '../../../../types/offer';
+import {Offer, ApiOffer} from '../../../../types/offer';
 import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../hooks/index';
 import {MarkerType} from '../../../const';
 import { fillRentList } from '../../../../store/action';
-// import {sortBy} from '../../../const';
 
 type CardProps = {
-  appartment : Offer
+  appartment : ApiOffer
 }
 
 function SortCards(currentAppartment : Offer, offers : Offer[], index : number){
@@ -33,19 +31,18 @@ function CardElement({appartment} : CardProps):JSX.Element{
   const mouseLeave = (evt: MouseEvent) => {
     evt.preventDefault();
     dispatch(fillRentList([...initialState]));
-    console.log(offersList);
   };
   return(
     <article className="cities__place-card place-card"
       onMouseOver={mouseHolding} onMouseOut={mouseLeave}
     >
-      <div className={appartment.isPremium ? 'visually-hidden' : 'place-card__mark'}>
+      <div className={appartment.is_premium ? 'visually-hidden' : 'place-card__mark'}>
 
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#icon-bookmark">
-          <img className="place-card__image" src={appartment.pictures[0]} width="260" height="200" alt="Place" />
+          <img className="place-card__image" src={appartment.preview_image} width="260" height="200" alt="Place" />
         </a>
       </div>
       <div className="place-card__info">
@@ -68,7 +65,7 @@ function CardElement({appartment} : CardProps):JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`property/${appartment.id}/${appartment.city}`}>{appartment.name}</a>
+          <a href={`property/${appartment.id}/${appartment.city}`}>{appartment.title}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import Offer from '../../../types/offer';
+import {Offer} from '../../../types/offer';
 import dayjs from 'dayjs';
 
 type ReviewsProps = {

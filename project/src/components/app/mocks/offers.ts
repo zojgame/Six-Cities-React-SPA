@@ -1,5 +1,5 @@
 import { MarkerType } from '../../const';
-import Offer from '../../../types/offer';
+import {Offer} from '../../../types/offer';
 import comments from './comments';
 import { sortBy } from '../../const';
 import { SortOptions } from '../../const';

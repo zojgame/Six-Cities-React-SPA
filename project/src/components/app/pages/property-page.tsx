@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
-import Offer from '../../../types/offer';
+import {Offer} from '../../../types/offer';
 import ErrorPage from './error-page';
 import Reviews from '../components/reviews';
 import Map from '../components/map';
 import { offers } from '../mocks/offers';
+
 
 type Params = {
   id: string,
