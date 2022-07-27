@@ -21,6 +21,7 @@ export type Offer = {
       longitude: number,
       zoom: number
     },
+    previewImage: string
   };
 
 export type ApiOffer ={

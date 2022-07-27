@@ -27,7 +27,8 @@ const amsterdamOffers : Offer[] = [
       latitude: 42,
       longitude: 42,
       zoom: 13
-    }
+    },
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     rating: 4.7,
@@ -49,7 +50,8 @@ const amsterdamOffers : Offer[] = [
       latitude: 42,
       longitude: 42,
       zoom: 13
-    }
+    },
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     rating: 4.9,
@@ -71,7 +73,8 @@ const amsterdamOffers : Offer[] = [
       latitude: 42,
       longitude: 42,
       zoom: 13
-    }
+    },
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     rating: 4.2,
@@ -93,7 +96,8 @@ const amsterdamOffers : Offer[] = [
       latitude: 42,
       longitude: 42,
       zoom: 13
-    }
+    },
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   }
 ];
 
@@ -254,7 +258,8 @@ const cologneOffers : Offer[] = [
     x: 9.9418000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'brussels'
+    city: 'brussels',
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     rating: 4.7,
@@ -276,7 +281,8 @@ const cologneOffers : Offer[] = [
       latitude: 42,
       longitude: 42,
       zoom: 13
-    }
+    },
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
 ];
 
@@ -303,7 +309,8 @@ const parisOffers : Offer[] = [
     x: 2.3888000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'paris'
+    city: 'paris',
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     location: {
@@ -325,7 +332,8 @@ const parisOffers : Offer[] = [
     x: 2.4088000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'paris'
+    city: 'paris',
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     location: {
@@ -347,7 +355,8 @@ const parisOffers : Offer[] = [
     x: 2.4288000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'paris'
+    city: 'paris',
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   },
   {
     location: {
@@ -369,7 +378,8 @@ const parisOffers : Offer[] = [
     x: 2.2588000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[1]],
-    city: 'paris'
+    city: 'paris',
+    previewImage: 'https://8.react.pages.academy/static/hotel/6.jpg'
   }
 ];
 

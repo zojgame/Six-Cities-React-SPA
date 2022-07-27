@@ -76,7 +76,8 @@ const adaptToClient = (receivedOffers: ApiOffer[]):Offer[] => {
         comments: mockComments,
         markerType: MarkerType.DEFAULT,
         city: offer.city.name,
-        location: offer.city.location}
+        location: offer.city.location,
+        previewImage: offer.preview_image}
     ));
 
   return adaptedOffers;

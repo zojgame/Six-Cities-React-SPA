@@ -37,19 +37,19 @@ function CardElement({appartment} : CardProps):JSX.Element{
     <article className="cities__place-card place-card"
       onMouseOver={mouseHolding} onMouseOut={mouseLeave}
     >
-      <div className={appartment.isPremium ? 'visually-hidden' : 'place-card__mark'}>
+      <div className={currentAppartment.isPremium ? 'visually-hidden' : 'place-card__mark'}>
 
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#icon-bookmark">
-          <img className="place-card__image" src={appartment.pictures[0]} width="260" height="200" alt="Place" />
+          <img className="place-card__image" src={currentAppartment.previewImage} width="260" height="200" alt="Place" />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{appartment.price}</b>
+            <b className="place-card__price-value">&euro;{currentAppartment.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -61,12 +61,12 @@ function CardElement({appartment} : CardProps):JSX.Element{
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: appartment.rating * 15}}></span>
+            <span style={{width: currentAppartment.rating * 15}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`property/${appartment.id}/${appartment.city}`}>{appartment.name}</a>
+          <a href={`property/${currentAppartment.id}/${currentAppartment.city}`}>{currentAppartment.name}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

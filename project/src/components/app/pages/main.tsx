@@ -6,7 +6,7 @@ import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
 
 function MainPage():JSX.Element{
-  const dispatch = useAppDispatch();//
+  const dispatch = useAppDispatch();
   const {city, offersList} = useAppSelector((state) => state);
   const currentOffers = offersList.filter((offer) => offer.city === city);
   return (
