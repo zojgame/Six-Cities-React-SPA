@@ -1,8 +1,8 @@
 import { MarkerType } from '../../const';
 import {Offer} from '../../../types/offer';
 import comments from './comments';
-import { sortBy } from '../../const';
-import { SortOptions } from '../../const';
+// import { sortBy } from '../../const';
+// import { SortOptions } from '../../const';
 
 const amsterdamOffers : Offer[] = [
   {
@@ -22,7 +22,12 @@ const amsterdamOffers : Offer[] = [
     x: 4.85309666406198,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'amsterdam'
+    city: 'amsterdam',
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    }
   },
   {
     rating: 4.7,
@@ -39,7 +44,12 @@ const amsterdamOffers : Offer[] = [
     x: 4.85309666406198,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'amsterdam'
+    city: 'amsterdam',
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    }
   },
   {
     rating: 4.9,
@@ -56,7 +66,12 @@ const amsterdamOffers : Offer[] = [
     x: 4.929309666406198,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'amsterdam'
+    city: 'amsterdam',
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    }
   },
   {
     rating: 4.2,
@@ -73,129 +88,156 @@ const amsterdamOffers : Offer[] = [
     x: 4.939309666406198,
     markerType: MarkerType.DEFAULT,
     comments: [comments[1]],
-    city: 'amsterdam'
+    city: 'amsterdam',
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    }
   }
-].sort(sortBy[SortOptions.POPULAR]);
+];
 
-const hamburgOffers : Offer[] = [
-  {
-    rating: 4.7,
-    name: 'Beautiful & luxurious studio at great location',
-    price: 130,
-    countBedrooms: 3,
-    capacity: 4,
-    isPremium: true,
-    pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
-      'img/apartment-01.jpg', 'img/apartment-03.jpg',
-      'img/studio-01.jpg', 'img/apartment-01.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '5',
-    y: 53.5753200100,
-    x: 10.0153400100,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'hamburg'
-  },
-  {
-    rating: 4.7,
-    name: 'Studio in the center of Moscow',
-    price: 100,
-    countBedrooms: 2,
-    capacity: 3,
-    isPremium: false,
-    pictures : ['/img/apartment-03.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '6',
-    y: 53.5558210800,
-    x: 10.0168410800,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'hamburg'
-  },
-  {
-    rating: 4.9,
-    name: 'Great appartment in a beutifull place',
-    price: 110,
-    countBedrooms: 3,
-    capacity: 3,
-    isPremium: false,
-    pictures : ['/img/apartment-01.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '7',
-    y: 53.5758210800,
-    x: 10.0568410800,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'hamburg'
-  },
-].sort(sortBy[SortOptions.POPULAR]);
+// const hamburgOffers : Offer[] = [
+//   {
+//     location: {
+//       latitude: 42,
+//       longitude: 42,
+//       zoom: 13
+//     },
+//     rating: 4.7,
+//     name: 'Beautiful & luxurious studio at great location',
+//     price: 130,
+//     countBedrooms: 3,
+//     capacity: 4,
+//     isPremium: true,
+//     pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
+//       'img/apartment-01.jpg', 'img/apartment-03.jpg',
+//       'img/studio-01.jpg', 'img/apartment-01.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '5',
+//     y: 53.5753200100,
+//     x: 10.0153400100,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'hamburg'
+//   },
+//   {
+//     rating: 4.7,
+//     name: 'Studio in the center of Moscow',
+//     price: 100,
+//     countBedrooms: 2,
+//     capacity: 3,
+//     isPremium: false,
+//     pictures : ['/img/apartment-03.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '6',
+//     y: 53.5558210800,
+//     x: 10.0168410800,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'hamburg'
+//   },
+//   {
+//     rating: 4.9,
+//     name: 'Great appartment in a beutifull place',
+//     price: 110,
+//     countBedrooms: 3,
+//     capacity: 3,
+//     isPremium: false,
+//     pictures : ['/img/apartment-01.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '7',
+//     y: 53.5758210800,
+//     x: 10.0568410800,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'hamburg'
+//   },
+// ].sort(sortBy[SortOptions.POPULAR]);
+const hamburgOffers = amsterdamOffers;
+// const dusseldorfOffers : Offer[] = [
+//   {
+//     location: {
+//       latitude: 42,
+//       longitude: 42,
+//       zoom: 13
+//     },
+//     rating: 4.7,
+//     name: 'Beautiful & luxurious studio at great location',
+//     price: 130,
+//     countBedrooms: 3,
+//     capacity: 4,
+//     isPremium: true,
+//     pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
+//       'img/apartment-01.jpg', 'img/apartment-03.jpg',
+//       'img/studio-01.jpg', 'img/apartment-01.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '8',
+//     y: 51.2217,
+//     x: 6.77616,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'dusseldorf'
+//   },
+// ].sort(sortBy[SortOptions.POPULAR]);
+const dusseldorfOffers = hamburgOffers;
+const brusselsOffers = hamburgOffers;
+// const brusselsOffers : Offer[] = [
+//   {
+//     rating: 4.7,
+//     name: 'Beautiful & luxurious studio at great location',
+//     price: 130,
+//     countBedrooms: 3,
+//     capacity: 4,
+//     isPremium: true,
+//     pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
+//       'img/apartment-01.jpg', 'img/apartment-03.jpg',
+//       'img/studio-01.jpg', 'img/apartment-01.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '9',
+//     y: 50.850339600012,
+//     x: 4.3517103000012,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'brussels'
+//   },
+//   {
 
-const dusseldorfOffers : Offer[] = [
-  {
-    rating: 4.7,
-    name: 'Beautiful & luxurious studio at great location',
-    price: 130,
-    countBedrooms: 3,
-    capacity: 4,
-    isPremium: true,
-    pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
-      'img/apartment-01.jpg', 'img/apartment-03.jpg',
-      'img/studio-01.jpg', 'img/apartment-01.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '8',
-    y: 51.2217,
-    x: 6.77616,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'dusseldorf'
-  },
-].sort(sortBy[SortOptions.POPULAR]);
-
-const brusselsOffers : Offer[] = [
-  {
-    rating: 4.7,
-    name: 'Beautiful & luxurious studio at great location',
-    price: 130,
-    countBedrooms: 3,
-    capacity: 4,
-    isPremium: true,
-    pictures : ['/img/apartment-02.jpg', 'img/room.jpg',
-      'img/apartment-01.jpg', 'img/apartment-03.jpg',
-      'img/studio-01.jpg', 'img/apartment-01.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '9',
-    y: 50.850339600012,
-    x: 4.3517103000012,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'brussels'
-  },
-  {
-    rating: 4.7,
-    name: 'Studio in the center of Moscow',
-    price: 100,
-    countBedrooms: 2,
-    capacity: 3,
-    isPremium: false,
-    pictures : ['/img/apartment-01.jpg'],
-    isActive : false,
-    offerType : 'Apartment',
-    id: '10',
-    y: 50.883339501113,
-    x: 4.3520103001113,
-    markerType: MarkerType.DEFAULT,
-    comments: [comments[0], comments[1]],
-    city: 'brussels'
-  },
-].sort(sortBy[SortOptions.POPULAR]);
+//     rating: 4.7,
+//     name: 'Studio in the center of Moscow',
+//     price: 100,
+//     countBedrooms: 2,
+//     capacity: 3,
+//     isPremium: false,
+//     pictures : ['/img/apartment-01.jpg'],
+//     isActive : false,
+//     offerType : 'Apartment',
+//     id: '10',
+//     y: 50.883339501113,
+//     x: 4.3520103001113,
+//     markerType: MarkerType.DEFAULT,
+//     comments: [comments[0], comments[1]],
+//     city: 'brussels',
+//     location: {
+//       latitude: 42,
+//       longitude: 42,
+//       zoom: 13
+//     }
+//   },
+// ].sort(sortBy[SortOptions.POPULAR]);
 
 const cologneOffers : Offer[] = [
   {
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    },
     rating: 4.7,
     name: 'Beautiful & luxurious studio at great location',
     price: 130,
@@ -229,12 +271,22 @@ const cologneOffers : Offer[] = [
     x: 9.9411000,
     markerType: MarkerType.DEFAULT,
     comments: [comments[0], comments[1]],
-    city: 'brussels'
+    city: 'brussels',
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    }
   },
 ];
 
 const parisOffers : Offer[] = [
   {
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    },
     rating: 4.7,
     name: 'Beautiful & luxurious studio at great location',
     price: 130,
@@ -254,6 +306,11 @@ const parisOffers : Offer[] = [
     city: 'paris'
   },
   {
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    },
     rating: 4.7,
     name: 'Studio in the center of Moscow',
     price: 100,
@@ -271,6 +328,11 @@ const parisOffers : Offer[] = [
     city: 'paris'
   },
   {
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    },
     rating: 4.9,
     name: 'Great appartment in a beutifull place',
     price: 110,
@@ -288,6 +350,11 @@ const parisOffers : Offer[] = [
     city: 'paris'
   },
   {
+    location: {
+      latitude: 42,
+      longitude: 42,
+      zoom: 13
+    },
     rating: 4.2,
     name: 'Great house with a greate view',
     price: 130,

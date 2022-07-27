@@ -1,6 +1,5 @@
 import { ApiDispatch } from '../../../../store/state';
-import { offers } from '../../mocks/offers';
-import { fillRentList, changeCity } from '../../../../store/action';
+import { changeCity } from '../../../../store/action';
 
 type CitiesListProps = {
   city: string,
@@ -17,7 +16,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Paris', dispatch);
-                ChangeOffers('Paris', dispatch);
               }
             }
           >
@@ -30,7 +28,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Cologne', dispatch);
-                ChangeOffers('Cologne', dispatch);
               }
             }
           >
@@ -43,7 +40,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Brussels', dispatch);
-                ChangeOffers('Brussels', dispatch);
               }
             }
           >
@@ -56,7 +52,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Amsterdam', dispatch);
-                ChangeOffers('Amsterdam', dispatch);
               }
             }
           >
@@ -69,7 +64,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Hamburg', dispatch);
-                ChangeOffers('Hamburg', dispatch);
               }
             }
           >
@@ -82,7 +76,6 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
               (evt) => {
                 evt.preventDefault();
                 ChangeCity('Dusseldorf', dispatch);
-                ChangeOffers('Dusseldorf', dispatch);
               }
             }
           >
@@ -94,13 +87,8 @@ function CitiesList({city, dispatch} : CitiesListProps):JSX.Element{
   );
 }
 
-function ChangeCity(city: string, dispatch: ApiDispatch):void{
+function ChangeCity(city: string, dispatch: ApiDispatch) :void{
   dispatch(changeCity(city));
-}
-
-function ChangeOffers(city: string, dispatch: ApiDispatch):void{
-  const updatedOffers = offers[city];
-  dispatch(fillRentList(updatedOffers));
 }
 
 export default CitiesList;

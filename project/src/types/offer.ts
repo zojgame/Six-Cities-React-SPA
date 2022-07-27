@@ -15,7 +15,12 @@ export type Offer = {
     x: number,
     markerType: string,
     comments: Comment[],
-    city: string
+    city: string,
+    location: {
+      latitude: number,
+      longitude: number,
+      zoom: number
+    },
   };
 
 export type ApiOffer ={
@@ -24,7 +29,7 @@ export type ApiOffer ={
       name: string,
       location: {
         latitude: number,
-        longitube: number,
+        longitude: number,
         zoom: number
       }
     },
@@ -42,7 +47,7 @@ export type ApiOffer ={
     is_premium: boolean,
     location: {
       latitude: number,
-      longitube: number,
+      longitude: number,
       zoom: number
     },
     max_adults: number,
@@ -52,5 +57,3 @@ export type ApiOffer ={
     title: string,
     type: string
   }
-
-// export default Offer;

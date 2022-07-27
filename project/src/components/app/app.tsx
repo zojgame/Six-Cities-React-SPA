@@ -40,7 +40,7 @@ function App({appartments: apartments} : AppScreenProps): JSX.Element {
           }
         />
         <Route path='/property/:id/:city' element={<PropertyPage />}/>
-        <Route path='/map' element={ <Map city={'Amsterdam'} points={apartments}/> }/>
+        <Route path='/map' element={ <Map points={apartments}/> }/>
       </Routes>
     </BrowserRouter>);
 }

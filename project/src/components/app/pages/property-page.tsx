@@ -14,7 +14,6 @@ type Params = {
 function PropertyPage():JSX.Element {
   const { id, city } = useParams<keyof Params>() as Params;
   const offersList = offers[city];
-  const firstLetterUpperCase = city[0].toUpperCase() + city.slice(1);
 
   const currentOffer = offersList.filter((offer) => (offer.id === id));
   if(currentOffer.length === 0){
@@ -172,7 +171,7 @@ function PropertyPage():JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <Map city={`${firstLetterUpperCase}`} points={nearestApartments} />
+              <Map points={nearestApartments} />
             </section>
           </section>
           <div className="container">

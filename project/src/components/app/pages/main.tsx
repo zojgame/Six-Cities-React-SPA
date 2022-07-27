@@ -2,14 +2,13 @@ import Map from '../components/map';
 import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
-import { offers } from '../mocks/offers';
 import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
-
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();//
   const {city, offersList} = useAppSelector((state) => state);
+  const currentOffers = offersList.filter((offer) => offer.city === city);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -47,13 +46,13 @@ function MainPage():JSX.Element{
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers[city].length} places to stay in {city}</b>
+              <b className="places__found">{currentOffers.length} places to stay in {city}</b>
               <OptionSortComponent />
-              <CardsListComponent appartments={ offersList }/>
+              <CardsListComponent appartments={ currentOffers }/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} points={offersList}/>
+                <Map points={currentOffers}/>
               </section>
             </div>
           </div>

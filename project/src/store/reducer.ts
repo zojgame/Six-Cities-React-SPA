@@ -9,7 +9,6 @@ import { sortBy } from '../components/const';
 type InitialState = {
   city: string,
   offersList: Offer[],
-  // offersList: Offer[],
   sortType: string,
   authorizationStatus : AuthorizationStatus,
   isDataLoaded: boolean
