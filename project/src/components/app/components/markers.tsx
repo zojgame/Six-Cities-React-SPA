@@ -1,11 +1,11 @@
 import { Marker, Popup, } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import { URL_MARKER_DEFAULT, MarkerType, URL_MARKER_CURRENT} from '../../const';
-import {ApiOffer} from '../../../types/offer';
+import {Offer} from '../../../types/offer';
 
 
 type MarkersProps = {
-    points : ApiOffer[],
+    points : Offer[],
 }
 
 function Markers({points} : MarkersProps):JSX.Element{

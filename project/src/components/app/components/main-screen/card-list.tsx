@@ -1,9 +1,10 @@
 import CardElement from './card';
-import { ApiOffer} from '../../../../types/offer';
+import { Offer} from '../../../../types/offer';
 
 type CardsListProps = {
-    appartments : ApiOffer[];
-  }
+  appartments : Offer[];
+  // appartments : ApiOffer[];
+}
 
 function CardsListComponent({appartments}:CardsListProps):JSX.Element{
   const cards = [];

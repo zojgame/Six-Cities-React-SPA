@@ -1,11 +1,11 @@
 import { MapContainer, TileLayer} from 'react-leaflet';
 import { useMap } from 'react-leaflet';
 import Markers from './markers';
-import {ApiOffer} from '../../../types/offer';
+import {Offer} from '../../../types/offer';
 import {CitiesPosition} from '../mocks/cities';
 
 type MapProps = {
-    points : ApiOffer[]
+    points : Offer[]
     city: string
 }
 

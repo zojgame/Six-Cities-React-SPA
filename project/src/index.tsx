@@ -4,13 +4,13 @@ import App from './components/app/app';
 import {amsterdamOffers} from './components/app/mocks/offers';
 import { Provider } from 'react-redux';
 import {store} from './store';
-import { fetchOffersAction } from './store/api-actions';
+// import { fetchOffersAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-store.dispatch(fetchOffersAction());
+// store.dispatch(fetchOffersAction());
 
 root.render(
   <React.StrictMode>

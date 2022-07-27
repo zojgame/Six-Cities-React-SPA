@@ -2,13 +2,13 @@ import { createReducer } from '@reduxjs/toolkit';
 // import {amsterdamOffers} from '../components/app/mocks/offers';
 import { AuthorizationStatus, SortOptions } from '../components/const';
 import { changeCity, fillRentList, changeSortType, loadOffers, requireAuthorization } from './action';
-import {ApiOffer} from '../types/offer';
+import {Offer} from '../types/offer';
 import { sortBy } from '../components/const';
 
 
 type InitialState = {
   city: string,
-  offersList: ApiOffer[],
+  offersList: Offer[],
   // offersList: Offer[],
   sortType: string,
   authorizationStatus : AuthorizationStatus,
