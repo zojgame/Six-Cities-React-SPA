@@ -1,13 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useParams } from 'react-router-dom';
-// import {Offer} from '../../../types/offer';
 import ErrorPage from './error-page';
-import Reviews from '../components/reviews';
 import Map from '../components/map';
-// import { offers } from '../mocks/offers';
 import { Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
-
+import LoadingPage from '../pages/loading-page';
 
 type Params = {
   id: string,
@@ -15,26 +13,26 @@ type Params = {
 }
 
 function PropertyPage():JSX.Element {
-  // const { id, city } = useParams<keyof Params>() as Params;
   const { id, city} = useParams<keyof Params>() as Params;
-  const {offersList, isDataLoaded} = useAppSelector((state) => state);
-  const currentOffers = offersList.filter((offer) => offer.city === city);
-  // const currentOffer = currentOffers.filter((offer)=> )
+  // store.dispatch(getComments(id));
 
-  // const offersList = offers[city];
-
-  // const currentOffer = offersList.filter((offer) => (offer.id === id));
+  const { offersList, isDataLoaded } = useAppSelector((state) => state);
+  // const comments = getComments(id);
   if(!isDataLoaded){
-    return <>loading</>;
+    return <LoadingPage />;
   }
+
+  const currentOffers = offersList.filter((offer) => offer.city === city);
+  const currentOffer = currentOffers.filter((offer) => offer.id.toString() === id)[0];
+
   if(currentOffers.length === 0){
     return (<ErrorPage />);
   }
 
   const nearestApartments = offersList.filter((offer) => (offer.id !== id));
-  const otherPlaces = nearestApartments.map((apartment) => (OtherApartment(apartment)));
+  const otherPlaces = nearestApartments.map((apartment) => (OtherApartment(apartment))).slice(0, 3);
 
-  const photos = currentOffers[0].pictures.map((pic) =>
+  const photos = currentOffer.pictures.map((pic) =>
     (
       <div className="property__image-wrapper" key={pic}>
         <img className="property__image" src={pic} alt="studio" />
@@ -85,12 +83,12 @@ function PropertyPage():JSX.Element {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                <div className={currentOffers[0].isPremium ? 'property__mark' : 'visually-hidden'}>
-                  <span className={currentOffers[0].isPremium ? '' : 'visually-hidden'}>Premium</span>
+                <div className={currentOffer.isPremium ? 'property__mark' : 'visually-hidden'}>
+                  <span className={currentOffer.isPremium ? '' : 'visually-hidden'}>Premium</span>
                 </div>
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {currentOffers[0].name}
+                    {currentOffer.name}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
@@ -101,24 +99,24 @@ function PropertyPage():JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: currentOffers[0].rating * 29}}></span>
+                    <span style={{width: currentOffer.rating * 29}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{currentOffers[0].rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    {currentOffers[0].offerType}
+                    {currentOffer.offerType}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {currentOffers[0].countBedrooms} Bedrooms
+                    {currentOffer.countBedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
                   Max 4 adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">&euro;{currentOffers[0].price}</b>
+                  <b className="property__price-value">&euro;{currentOffer.price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
@@ -178,7 +176,7 @@ function PropertyPage():JSX.Element {
                     </p>
                   </div>
                 </div>
-                <Reviews offer={currentOffers[0]}/>
+                {/* <Reviews offer={currentOffer} comments={comments}/> */}
               </div>
             </div>
             <section className="property__map map">

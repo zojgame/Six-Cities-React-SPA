@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {Offer} from '../../../types/offer';
 import dayjs from 'dayjs';
+import {Comment} from '../../../types/review';
 
 type ReviewsProps = {
-    offer : Offer
+    offer : Offer,
+    comments: Comment[]
 }
 
-function Reviews({offer} : ReviewsProps):JSX.Element{
-  const reviews = offer.comments.map((review) =>
+function Reviews({offer, comments} : ReviewsProps):JSX.Element{
+  const reviews = comments.map((review) =>
     (
       <li className="reviews__item" key=''>
         <div className="reviews__user user">
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src={review.photo} width="54" height="54" alt="Reviews avatar" />
+            <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
           </div>
           <span className="reviews__user-name">
-            {review.commentatorName}
+            {review.user.name}
           </span>
         </div>
         <div className="reviews__info">
@@ -26,12 +28,37 @@ function Reviews({offer} : ReviewsProps):JSX.Element{
             </div>
           </div>
           <p className="reviews__text">
-            {review.description}
+            {review.comment}
           </p>
           <time className="reviews__time" dateTime="dayjs(review.date).format('YYYY MM DD')">{dayjs(review.date).format('MMMM YYYY')}</time>
         </div>
       </li>
     ));
+  // const reviews = offer.comments.map((review) =>
+  //   (
+  //     <li className="reviews__item" key=''>
+  //       <div className="reviews__user user">
+  //         <div className="reviews__avatar-wrapper user__avatar-wrapper">
+  //           <img className="reviews__avatar user__avatar" src={review.photo} width="54" height="54" alt="Reviews avatar" />
+  //         </div>
+  //         <span className="reviews__user-name">
+  //           {review.commentatorName}
+  //         </span>
+  //       </div>
+  //       <div className="reviews__info">
+  //         <div className="reviews__rating rating">
+  //           <div className="reviews__stars rating__stars">
+  //             <span style={{width: review.rating * 20}}></span>
+  //             <span className="visually-hidden">Rating</span>
+  //           </div>
+  //         </div>
+  //         <p className="reviews__text">
+  //           {review.description}
+  //         </p>
+  //         <time className="reviews__time" dateTime="dayjs(review.date).format('YYYY MM DD')">{dayjs(review.date).format('MMMM YYYY')}</time>
+  //       </div>
+  //     </li>
+  //   ));
 
   return(
     <section className="property__reviews reviews">

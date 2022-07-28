@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '.';
 import { APIRoute, AuthorizationStatus, MarkerType } from '../components/const';
-import { loadOffers, requireAuthorization } from './action';
+import { loadComments, loadOffers, requireAuthorization } from './action';
 import { api } from '.';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { ApiOffer, Offer } from '../types/offer';
+import { Comment } from '../types/review';
 
 export const fetchOffersAction = createAsyncThunk(
   'data/fetchOffers',
@@ -40,6 +41,15 @@ export const logoutAction = createAsyncThunk(
     await api.delete(APIRoute.Logout);
     dropToken();
     store.dispatch(requireAuthorization(AuthorizationStatus.NotAuth));
+  }
+);
+
+export const getComments = createAsyncThunk(
+  'propertyPage/fetchComments',
+  async (hotelId : string) => {
+    const {data: comments} = await api.post<Comment[]>(`comments/${hotelId}`, {hotelId});
+    // const {data: comments} = await api.post<Comment[]>('comments/1/nearby', {hotelId});
+    store.dispatch(loadComments(comments));
   }
 );
 

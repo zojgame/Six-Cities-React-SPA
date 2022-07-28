@@ -1,4 +1,4 @@
-type Comment = {
+export type Comment = {
     description: string,
     rating: number,
     commentatorName: string,
