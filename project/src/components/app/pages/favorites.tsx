@@ -1,12 +1,6 @@
 import Logo from '../logo/logo';
-import {Offer} from '../../../types/offer';
-import FavoriteCard from '../favorite-screen/favorite-card';
 
-type FavoriteProps = {
-  appartments : Offer[]
-}
-
-function FavoritesPage({appartments} : FavoriteProps):JSX.Element{
+function FavoritesPage():JSX.Element{
   return (
     <div className="page">
       <header className="header">
@@ -49,9 +43,9 @@ function FavoritesPage({appartments} : FavoriteProps):JSX.Element{
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <FavoriteCard appartment={appartments[0]}/>
+                  {/* <FavoriteCard appartment={appartments[0]}/>
                   <FavoriteCard appartment={appartments[1]}/>
-                  <FavoriteCard appartment={appartments[2]}/>
+                  <FavoriteCard appartment={appartments[2]}/> */}
                 </div>
               </li>
 
@@ -64,7 +58,7 @@ function FavoritesPage({appartments} : FavoriteProps):JSX.Element{
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <FavoriteCard appartment={appartments[3]}/>
+                  {/* <FavoriteCard appartment={appartments[3]}/> */}
                 </div>
               </li>
             </ul>

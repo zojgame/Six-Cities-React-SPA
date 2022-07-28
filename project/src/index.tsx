@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import {amsterdamOffers} from './components/app/mocks/offers';
 import { Provider } from 'react-redux';
 import {store} from './store';
 import { fetchOffersAction } from './store/api-actions';
@@ -15,9 +14,7 @@ store.dispatch(fetchOffersAction());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App
-        appartments = {amsterdamOffers}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

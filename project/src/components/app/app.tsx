@@ -6,14 +6,10 @@ import LoginPage from './pages/login-page';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import PropertyPage from './pages/property-page';
 import PrivateRoute from './pages/private-route-page';
-import {Offer} from '../../types/offer';
-import Map from './components/map';
+import DefaultMap from './components/default-map';
 
-type AppScreenProps = {
-  appartments : Offer[]
-}
 
-function App({appartments: apartments} : AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,12 +31,12 @@ function App({appartments: apartments} : AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <FavoritesPage appartments={apartments}/>
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />
         <Route path='/property/:id/:city' element={<PropertyPage />}/>
-        <Route path='/map' element={ <Map points={apartments}/> }/>
+        <Route path='/map' element={ <DefaultMap/> }/>
       </Routes>
     </BrowserRouter>);
 }
