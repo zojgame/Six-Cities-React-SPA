@@ -4,10 +4,16 @@ import Logo from '../logo/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
+import LoadingPage from './loading-page';
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
-  const {city, offersList} = useAppSelector((state) => state);
+  const {city, offersList, isDataLoaded} = useAppSelector((state) => state);
+
+  if(!isDataLoaded){
+    return <LoadingPage />;
+  }
+
   const currentOffers = offersList.filter((offer) => offer.city === city);
   return (
     <div className="page page--gray page--main">
