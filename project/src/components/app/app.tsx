@@ -3,17 +3,21 @@ import { AppRoute, AuthorizationStatus } from '../const';
 import FavoritesPage from './pages/favorites';
 import ErrorPage from './pages/error-page';
 import LoginPage from './pages/login-page';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import PropertyPage from './pages/property-page';
 import PrivateRoute from './pages/private-route-page';
 import DefaultMap from './components/default-map';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-route';
 
 
 function App(): JSX.Element {
 
 
   return (
-    <BrowserRouter>
+
+    // <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -40,7 +44,9 @@ function App(): JSX.Element {
         <Route path='/property/:id/:city' element={<PropertyPage />}/>
         <Route path='/map' element={ <DefaultMap/> }/>
       </Routes>
-    </BrowserRouter>);
+    </HistoryRouter>
+    // </BrowserRouter>
+  );
 }
 
 export default App;
