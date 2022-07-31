@@ -1,19 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useNavigate } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { FormEvent, useRef } from 'react';
-import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../../hooks';
 import {loginAction} from '../../../store/api-actions';
 import {AuthData} from '../../../types/auth-data';
 
-// type AuthData = {
-//   login: string,
-//   email: string
-// }
-
 function LoginPage():JSX.Element{
-  // const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

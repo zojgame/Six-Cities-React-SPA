@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'guess-melody-token';
+const AUTH_TOKEN_KEY_NAME = 'six-cities-auth-token';
 
 export type Token = string;
 

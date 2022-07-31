@@ -5,11 +5,12 @@ import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
 import LoadingPage from './loading-page';
+// import { getComments } from '../../../store/api-actions';
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
   const {city, offersList, isDataLoaded} = useAppSelector((state) => state);
-
+  // dispatch(getComments('1'));
   if(!isDataLoaded){
     return <LoadingPage />;
   }

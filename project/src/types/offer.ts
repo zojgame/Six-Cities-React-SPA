@@ -58,3 +58,5 @@ export type ApiOffer ={
     title: string,
     type: string
   }
+
+export type Offers = Offer[];

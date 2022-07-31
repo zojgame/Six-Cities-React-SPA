@@ -58,3 +58,9 @@ export enum APIRoute {
   Hotels = '/hotels'
 }
 
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHARIZED = 401,
+  NOT_FOUND = 404,
+}
+

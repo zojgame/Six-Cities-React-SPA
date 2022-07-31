@@ -3,14 +3,13 @@ import { Offer} from '../../../../types/offer';
 
 type CardsListProps = {
   appartments : Offer[];
-  // appartments : ApiOffer[];
 }
 
 function CardsListComponent({appartments}:CardsListProps):JSX.Element{
   const cards = [];
 
   for (let i = 0; i < appartments.length; i++){
-    cards.push(<CardElement appartment = {appartments[i]}/>);
+    cards.push(<CardElement appartment = {appartments[i]} key={`i${0}`}/>);
   }
 
   return (
