@@ -1,5 +1,5 @@
 import MainPage from './pages/main';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute } from '../const';
 import FavoritesPage from './pages/favorites';
 import ErrorPage from './pages/error-page';
 import LoginPage from './pages/login-page';
@@ -15,8 +15,6 @@ function App(): JSX.Element {
 
 
   return (
-
-    // <BrowserRouter>
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
@@ -34,18 +32,21 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
+            <PrivateRoute>
               <FavoritesPage/>
             </PrivateRoute>
           }
         />
-        <Route path='/property/:id/:city' element={<PropertyPage />}/>
+        {/* <Route path='/property/:id/:city' element={<PropertyPage />}/> */}
+        <Route path='/property/:id/:city' element={
+          <PrivateRoute>
+            <PropertyPage />
+          </PrivateRoute>
+        }
+        />
         <Route path='/map' element={ <DefaultMap/> }/>
       </Routes>
     </HistoryRouter>
-    // </BrowserRouter>
   );
 }
 

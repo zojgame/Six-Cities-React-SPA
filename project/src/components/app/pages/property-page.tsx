@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useParams } from 'react-router-dom';
 import ErrorPage from './error-page';
 import Map from '../components/map';
 import { Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
 import LoadingPage from '../pages/loading-page';
+import {useParams} from 'react-router-dom';
 
 type Params = {
   id: string,
@@ -66,7 +64,7 @@ function PropertyPage():JSX.Element {
                   </li>
                   <li className="header__nav-item">
                     <a className="header__nav-link" href="#tag">
-                      <span className="header__signout">Sign out{id}</span>
+                      <span className="header__signout">Sign out</span>
                     </a>
                   </li>
                 </ul>

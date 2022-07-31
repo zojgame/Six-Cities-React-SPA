@@ -1,8 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-// import {amsterdamOffers} from '../components/app/mocks/offers';
 import { AuthorizationStatus, SortOptions } from '../components/const';
 import { changeCity, changeSortType, loadOffers,
-  requireAuthorization, loadComments, setError, fillRentList } from './action';
+  requireAuthorization, loadComments, setError, fillRentList, setLoadingAnimation } from './action';
 import {Offer} from '../types/offer';
 import { sortBy } from '../components/const';
 import {Comment} from '../types/review';
@@ -52,6 +51,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setLoadingAnimation, (state, action)=> {
+      state.isDataLoaded = action.payload;
     });
 });
 

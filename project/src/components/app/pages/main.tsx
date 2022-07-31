@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Map from '../components/map';
 import CardsListComponent from '../components/main-screen/card-list';
 import Logo from '../logo/logo';
@@ -5,17 +6,64 @@ import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
 import LoadingPage from './loading-page';
-// import { getComments } from '../../../store/api-actions';
+import { logoutAction } from '../../../store/api-actions';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { AuthorizationStatus } from '../../const';
+import { setAnimationLoading } from '../../../store/api-actions';
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
-  const {city, offersList, isDataLoaded} = useAppSelector((state) => state);
-  // dispatch(getComments('1'));
+  const {city, offersList, isDataLoaded, authorizationStatus} = useAppSelector((state) => state);
+  const navigate = useNavigate();
   if(!isDataLoaded){
     return <LoadingPage />;
   }
 
+  const handleLogin = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    navigate(AppRoute.Login);
+  };
+
+  const handleLogOut = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(setAnimationLoading());
+    dispatch(logoutAction());
+  };
+
   const currentOffers = offersList.filter((offer) => offer.city === city);
+  const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+  const authHeader = isAuth ? (
+    <nav className="header__nav">
+      <ul className="header__nav-list">
+        <li className="header__nav-item user">
+          <a className="header__nav-link header__nav-link--profile" href="http://localhost:3000">
+            <div className="header__avatar-wrapper user__avatar-wrapper">
+            </div>
+            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+          </a>
+        </li>
+        <li className="header__nav-item">
+          <a className="header__nav-link" href="/" onClick={handleLogOut}>
+            <span className="header__signout">Sign out</span>
+          </a>
+        </li>
+      </ul>
+    </nav>)
+    : (
+      <nav className="header__nav">
+        <ul className="header__nav-list">
+          <li className="header__nav-item">
+            <a className="header__nav-link" href="/" onClick={ handleLogin }>
+              <div className="header__avatar-wrapper user__avatar-wrapper">
+              </div>
+              <span className="header__signout">Login</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    );
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -24,22 +72,7 @@ function MainPage():JSX.Element{
             <div className="header__left">
               <Logo />
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="http://localhost:3000">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="http://localhost:3000">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            {authHeader}
           </div>
         </div>
       </header>
@@ -47,7 +80,7 @@ function MainPage():JSX.Element{
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList city={ city } dispatch={dispatch} />
+          <CitiesList city={ city } dispatch={ dispatch } />
         </div>
         <div className="cities">
           <div className="cities__places-container container">

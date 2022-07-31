@@ -19,3 +19,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('login/req
 export const setError = createAction<string>('game/setError');
 
 export const redirectToRoute = createAction<AppRoute>('loginPage/redirectToRoute');
+
+export const setLoadingAnimation = createAction<boolean>('main/setLoadingAnimation');

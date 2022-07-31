@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '.';
 import { APIRoute, AuthorizationStatus, MarkerType, AppRoute } from '../components/const';
-import { loadComments, loadOffers, requireAuthorization, setError, redirectToRoute } from './action';
+import { loadComments, loadOffers, requireAuthorization, setError, redirectToRoute, setLoadingAnimation } from './action';
 import { api } from '.';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -10,8 +10,20 @@ import { ApiOffer, Offer } from '../types/offer';
 import { Comment } from '../types/review';
 import { errorHandle } from '../services/error-handle';
 
+export const setAnimationLoading = createAsyncThunk(
+  'main/setLoading',
+  () => {
+    const timeoutAnimation = 300;
+    store.dispatch(setLoadingAnimation(false));
+    setTimeout(
+      () =>store.dispatch(setLoadingAnimation(true)),
+      timeoutAnimation
+    );
+  }
+);
+
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'main/clearError',
   () => {
     const timeoutShowError = 2000;
     setTimeout(
@@ -42,8 +54,10 @@ export const checkAuthStatus = createAsyncThunk(
       await api.get(APIRoute.Login);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
+
     catch(error){
       errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.Login));
     }
   }
 );

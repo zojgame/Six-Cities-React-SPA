@@ -25,7 +25,7 @@ function CardElement({appartment} : CardProps):JSX.Element{
   const initialApartment = {...currentAppartment, markerType: MarkerType.DEFAULT};
   const sortedOffers = SortCards(updatedApartment, offersList, index);
   const initialState = SortCards(initialApartment, offersList, index);
-  const mouseHolding = (evt: MouseEvent) => {
+  const mouseHolding = (evt: MouseEvent) => {//
     evt.preventDefault();
     dispatch(fillRentList([...sortedOffers]));
   };
