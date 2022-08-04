@@ -3,7 +3,11 @@ export type Comment = {
     rating: number,
     commentatorName: string,
     photo: string,
-    date: Date
+    date: string
 }
 
-export default Comment;
+export type ApiComment = {
+    comment: string,
+    rating: number,
+    hotelId : string
+}

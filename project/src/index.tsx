@@ -1,18 +1,20 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import {store} from './store';
 import { fetchOffersAction } from './store/api-actions';
 import ErrorMessageComponent from './components/error-message/error-message';
+import {createRoot} from 'react-dom/client';
 
 store.dispatch(fetchOffersAction());
 
-ReactDOM.render(
+const container = createRoot(document.getElementById('root'));
+container.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessageComponent />
       <App />
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root'));
+  </React.StrictMode>
+);

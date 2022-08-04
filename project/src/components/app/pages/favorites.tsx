@@ -43,9 +43,6 @@ function FavoritesPage():JSX.Element{
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {/* <FavoriteCard appartment={appartments[0]}/>
-                  <FavoriteCard appartment={appartments[1]}/>
-                  <FavoriteCard appartment={appartments[2]}/> */}
                 </div>
               </li>
 
@@ -58,7 +55,6 @@ function FavoritesPage():JSX.Element{
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {/* <FavoriteCard appartment={appartments[3]}/> */}
                 </div>
               </li>
             </ul>

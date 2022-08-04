@@ -1,9 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import ErrorPage from './error-page';
 import Map from '../components/map';
-import { Offer } from '../../../types/offer';
+import { ApiOffer, Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
 import LoadingPage from '../pages/loading-page';
 import {useParams} from 'react-router-dom';
+// import {store} from '../../../store/index';
+import GetOfferData from '../../../store/get-offer-data';
+// import { getOfferData } from '../../../store/get-offer-data';
+import {nanoid} from 'nanoid';
+import {useEffect} from 'react';
+import {useAppDispatch} from '../../../hooks';
+import {getComments, getNearestOffers, adaptToClient} from '../../../store/api-actions';
+import Reviews from '../components/reviews';
 
 type Params = {
   id: string,
@@ -11,11 +21,17 @@ type Params = {
 }
 
 function PropertyPage():JSX.Element {
-  const { id, city} = useParams<keyof Params>() as Params;
-  // store.dispatch(getComments(id));
 
-  const { offersList, isDataLoaded } = useAppSelector((state) => state);
-  // const comments = getComments(id); Эти комментарии нужны для отображение их в дальшейшем через api
+  const { id, city } = useParams<keyof Params>() as Params;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const currentId = id;
+    dispatch(getComments(currentId));
+    dispatch(getNearestOffers(currentId));
+
+  }, [dispatch, id]);
+
+  const { offersList, isDataLoaded, comments, nearestOffers } = useAppSelector((state) => state);
   if(!isDataLoaded){
     return <LoadingPage />;
   }
@@ -27,16 +43,22 @@ function PropertyPage():JSX.Element {
     return (<ErrorPage />);
   }
 
-  const nearestApartments = offersList.filter((offer) => (offer.id !== id));
-  const otherPlaces = nearestApartments.map((apartment) => (OtherApartment(apartment))).slice(0, 3);
+  const adaptedOffers = adaptToClient(nearestOffers);
+  const otherPlaces = adaptedOffers.map((apartment) => (OtherApartment(apartment))).slice(0, 3);
 
   const photos = currentOffer.pictures.map((pic) =>
     (
-      <div className="property__image-wrapper" key={pic}>
-        <img className="property__image" src={pic} alt="studio" />
+      <div className="property__image-wrapper" key={nanoid(8)}>
+        <img className="property__image" src={pic} alt="studio" key={nanoid(8)}/>
       </div>
     ));
 
+  const items = currentOffer.goods.map((good) =>
+    (
+      <li className="property__inside-item" key={nanoid()}>
+        {good}
+      </li>
+    ));
   return (
     <body>
       <base href="/" />
@@ -86,7 +108,7 @@ function PropertyPage():JSX.Element {
                 </div>
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {currentOffer.name}
+                    {currentOffer.title}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
@@ -120,65 +142,33 @@ function PropertyPage():JSX.Element {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    <li className="property__inside-item">
-                    Wi-Fi
-                    </li>
-                    <li className="property__inside-item">
-                    Washing machine
-                    </li>
-                    <li className="property__inside-item">
-                    Towels
-                    </li>
-                    <li className="property__inside-item">
-                    Heating
-                    </li>
-                    <li className="property__inside-item">
-                    Coffee machine
-                    </li>
-                    <li className="property__inside-item">
-                    Baby seat
-                    </li>
-                    <li className="property__inside-item">
-                    Kitchen
-                    </li>
-                    <li className="property__inside-item">
-                    Dishwasher
-                    </li>
-                    <li className="property__inside-item">
-                    Cabel TV
-                    </li>
-                    <li className="property__inside-item">
-                    Fridge
-                    </li>
+                    {items}
                   </ul>
                 </div>
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src={currentOffer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
-                    Angelina
+                      {currentOffer.host.name}
                     </span>
                     <span className="property__user-status">
-                    Pro
+                      {currentOffer.host.isPro ? 'Pro' : ''}
                     </span>
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                      {currentOffer.description}
                     </p>
                   </div>
                 </div>
-                {/* <Reviews offer={currentOffer} comments={comments}/> */}
+                <Reviews hotelId={id}/>
               </div>
             </div>
             <section className="property__map map">
-              <Map points={nearestApartments} />
+              <Map points={adaptedOffers} />
             </section>
           </section>
           <div className="container">
@@ -204,9 +194,7 @@ function OtherApartment(apartment : Offer):JSX.Element{
       <div className="near-places__image-wrapper place-card__image-wrapper">
         <a href="#tag">
           <img className="place-card__image"
-            src={apartment?.pictures[0]
-              ? apartment.pictures[0]
-              : 'img/apartment-03.jpg'} width="260" height="200" alt="Place"
+            src={apartment?.previewImage ? apartment.previewImage : 'img/apartment-03.jpg'} width="260" height="200" alt="Place"
           />
         </a>
       </div>
@@ -230,7 +218,7 @@ function OtherApartment(apartment : Offer):JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#tag">{apartment.name}</a>
+          <a href="#tag">{apartment.title}</a>
         </h2>
         <p className="place-card__type">{apartment.offerType}</p>
       </div>

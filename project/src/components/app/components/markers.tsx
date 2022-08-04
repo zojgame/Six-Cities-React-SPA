@@ -26,7 +26,7 @@ function Markers({points} : MarkersProps):JSX.Element{
           ? defaultIcon : currentIcon}
         >
           <Popup>
-            {point.name}
+            {point.title}
           </Popup>
         </Marker>))};
     </>);

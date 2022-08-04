@@ -37,7 +37,6 @@ function App(): JSX.Element {
             </PrivateRoute>
           }
         />
-        {/* <Route path='/property/:id/:city' element={<PropertyPage />}/> */}
         <Route path='/property/:id/:city' element={
           <PrivateRoute>
             <PropertyPage />

@@ -7,6 +7,7 @@ type PrivateRouteProps = RouteProps & {
 }
 
 function PrivateRoute(props : PrivateRouteProps):JSX.Element{
+
   const {children} = props;
   store.dispatch(checkAuthStatus());
   return children;

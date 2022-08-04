@@ -1,9 +1,9 @@
-import Comment from './comment';
+import {Comment} from './comment';
 
 export type Offer = {
     rating: number,
-    name: string,
     price: number,
+    goods: string[],
     countBedrooms: number,
     capacity: number,
     isPremium : boolean,
@@ -21,7 +21,15 @@ export type Offer = {
       longitude: number,
       zoom: number
     },
-    previewImage: string
+    previewImage: string,
+    description: string,
+    title: string,
+    host: {
+      avatarUrl: string,
+      id: number,
+      isPro: boolean,
+      name: string
+    },
   };
 
 export type ApiOffer ={

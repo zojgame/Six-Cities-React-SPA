@@ -66,7 +66,7 @@ function CardElement({appartment} : CardProps):JSX.Element{
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={`property/${currentAppartment.id}/${currentAppartment.city}`}>{currentAppartment.name}</a>
+          <a href={`property/${currentAppartment.id}/${currentAppartment.city}`}>{currentAppartment.title}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

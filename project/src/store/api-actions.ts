@@ -1,14 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '.';
 import { APIRoute, AuthorizationStatus, MarkerType, AppRoute } from '../components/const';
-import { loadComments, loadOffers, requireAuthorization, setError, redirectToRoute, setLoadingAnimation } from './action';
+import { loadComments, loadOffers, requireAuthorization,
+  setError, redirectToRoute, setLoadingAnimation,
+  loadNearestOffers,
+  sendNewComment } from './action';
 import { api } from '.';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { ApiOffer, Offer } from '../types/offer';
-import { Comment } from '../types/review';
+import dayjs from 'dayjs';
 import { errorHandle } from '../services/error-handle';
+import { ApiComment } from '../types/comment';
+import { Comment } from '../types/review';
+// import { nanoid } from '@reduxjs/toolkit';
 
 export const setAnimationLoading = createAsyncThunk(
   'main/setLoading',
@@ -77,6 +83,40 @@ export const loginAction = createAsyncThunk(
   }
 );
 
+export const sendComment = createAsyncThunk(
+  'user/login',
+  async ({comment, rating, hotelId} : ApiComment) => {
+    try{
+      await api.post(`/comments/${hotelId}`, {comment, rating});
+      const newComment = CreateNewComment({comment, rating});
+      // const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      // saveToken(token);
+      store.dispatch(sendNewComment(newComment));
+      // store.dispatch(redirectToRoute(AppRoute.Main));
+    }
+    catch(error){
+      errorHandle(error);
+    }
+  }
+);
+
+function CreateNewComment({comment, rating} : {comment: string, rating: number}):Comment{
+  const newComment: Comment = {
+    comment: comment,
+    date: new Date().toISOString(),
+    id: 200,
+    rating: rating,
+    user: {
+      avatarUrl: 'atl',
+      id: 200,
+      isPro: false,
+      name: 'Danil'
+    }
+  };
+
+  return newComment;
+}
+
 export const logoutAction = createAsyncThunk(
   'user/logout',
   async () => {
@@ -95,8 +135,8 @@ export const getComments = createAsyncThunk(
   'propertyPage/fetchComments',
   async (hotelId : string) => {
     try{
-      const {data: comments} = await api.post<Comment[]>(`comments/${hotelId}`, {hotelId});
-      store.dispatch(loadComments(comments));
+      const {data} = await api.get(`comments/${hotelId}`);
+      store.dispatch(loadComments(data));
     }
     catch(error){
       errorHandle(error);
@@ -104,7 +144,22 @@ export const getComments = createAsyncThunk(
   }
 );
 
-const adaptToClient = (receivedOffers: ApiOffer[]):Offer[] => {
+export const getNearestOffers = createAsyncThunk(
+  'propertyPage/fetchNearestOffers',
+  async(hotelId : string) => {
+    try{
+      const {data} = await api.get(`/hotels/${hotelId}/nearby`);
+      store.dispatch(loadNearestOffers(data));
+    }
+    catch(error){
+      errorHandle(error);
+    }
+  }
+);
+
+
+//data adapter
+export const adaptToClient = (receivedOffers: ApiOffer[]) : Offer[] => {
   const mockComments = [
     {description: `A quiet cozy and picturesque that hides behind a a river
                * by the unique lightness of Amsterdam. The 
@@ -112,18 +167,19 @@ const adaptToClient = (receivedOffers: ApiOffer[]):Offer[] => {
     rating: 4,
     commentatorName: 'Max',
     photo: 'img/avatar-max.jpg',
-    date: new Date(2001, 12, 20)},
+    date: dayjs(new Date()).toISOString()},
     {description: 'Awesome',
       rating: 5,
       commentatorName: 'Mathway',
       photo: 'img/avatar-max.jpg',
-      date: new Date(2022, 12, 20)}
+      date: dayjs(new Date()).toISOString()}
   ];
 
   const adaptedOffers: Offer[] = receivedOffers.map((offer) =>
     (
-      {rating: offer.rating,
-        name: offer.title,
+      {
+        goods: offer.goods,
+        rating: offer.rating,
         price: offer.price,
         countBedrooms: offer.bedrooms,
         capacity: offer.max_adults,
@@ -138,7 +194,16 @@ const adaptToClient = (receivedOffers: ApiOffer[]):Offer[] => {
         markerType: MarkerType.DEFAULT,
         city: offer.city.name,
         location: offer.city.location,
-        previewImage: offer.preview_image}
+        previewImage: offer.preview_image,
+        description: offer.description,
+        title: offer.title,
+        host: {
+          avatarUrl: offer.host.avatar_url,
+          id: offer.host.id,
+          isPro: offer.host.is_pro,
+          name: offer.host.name
+        }
+      }
     ));
 
   return adaptedOffers;
