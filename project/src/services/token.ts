@@ -7,10 +7,10 @@ export const getToken = (): Token => {
   return token ?? '';
 };
 
-export const saveToken = (token : Token):void => {
+export const saveToken = (token : Token) : void => {
   localStorage.setItem(AUTH_TOKEN_KEY_NAME, token);
 };
 
-export const dropToken = ():void => {
+export const dropToken = () : void => {
   localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
 };

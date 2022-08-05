@@ -15,8 +15,7 @@ function Reviews({hotelId} : ReviesProps):JSX.Element{
       <li className="reviews__item" key={nanoid()}>
         <div className="reviews__user user" >
           <div className="reviews__avatar-wrapper user__avatar-wrapper">
-            <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
-            {/* <img className="reviews__avatar user__avatar" src="src="https://8.react.pages.academy/static/avatar/7.jpg" width="54" height="54" alt="Reviews avatar" /> */}
+            <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt=""/>
           </div>
           <span className="reviews__user-name">
             {review.user.name}

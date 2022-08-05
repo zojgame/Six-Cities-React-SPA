@@ -1,19 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import ErrorPage from './error-page';
 import Map from '../components/map';
-import { ApiOffer, Offer } from '../../../types/offer';
+import { Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
 import LoadingPage from '../pages/loading-page';
-import {useParams} from 'react-router-dom';
-// import {store} from '../../../store/index';
-import GetOfferData from '../../../store/get-offer-data';
-// import { getOfferData } from '../../../store/get-offer-data';
+import {useParams, useNavigate} from 'react-router-dom';
 import {nanoid} from 'nanoid';
-import {useEffect} from 'react';
 import {useAppDispatch} from '../../../hooks';
 import {getComments, getNearestOffers, adaptToClient} from '../../../store/api-actions';
 import Reviews from '../components/reviews';
+import {setAnimationLoading, logoutAction} from '../../../store/api-actions';
+import { AppRoute } from '../../const';
 
 type Params = {
   id: string,
@@ -24,14 +20,11 @@ function PropertyPage():JSX.Element {
 
   const { id, city } = useParams<keyof Params>() as Params;
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    const currentId = id;
-    dispatch(getComments(currentId));
-    dispatch(getNearestOffers(currentId));
+  const navigate = useNavigate();
+  dispatch(getComments(id));
+  dispatch(getNearestOffers(id));
 
-  }, [dispatch, id]);
-
-  const { offersList, isDataLoaded, comments, nearestOffers } = useAppSelector((state) => state);
+  const { offersList, isDataLoaded, nearestOffers } = useAppSelector((state) => state);
   if(!isDataLoaded){
     return <LoadingPage />;
   }
@@ -42,6 +35,12 @@ function PropertyPage():JSX.Element {
   if(currentOffers.length === 0){
     return (<ErrorPage />);
   }
+  const handleLogOut = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(setAnimationLoading());
+    dispatch(logoutAction());
+    navigate(AppRoute.Main);
+  };
 
   const adaptedOffers = adaptToClient(nearestOffers);
   const otherPlaces = adaptedOffers.map((apartment) => (OtherApartment(apartment))).slice(0, 3);
@@ -49,7 +48,7 @@ function PropertyPage():JSX.Element {
   const photos = currentOffer.pictures.map((pic) =>
     (
       <div className="property__image-wrapper" key={nanoid(8)}>
-        <img className="property__image" src={pic} alt="studio" key={nanoid(8)}/>
+        <img className="property__image" src={pic} alt="studio" />
       </div>
     ));
 
@@ -85,7 +84,7 @@ function PropertyPage():JSX.Element {
                     </a>
                   </li>
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href="#tag">
+                    <a className="header__nav-link" href="#tag" onClick={handleLogOut}>
                       <span className="header__signout">Sign out</span>
                     </a>
                   </li>
