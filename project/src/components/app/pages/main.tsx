@@ -11,10 +11,17 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { AuthorizationStatus } from '../../const';
 import { setAnimationLoading } from '../../../store/api-actions';
+import { getCity } from '../../../store/switches/selectors';
+import { getDataLoadedStatus, getOffers } from '../../../store/data-offers/selectors';
+import { getAuthorizationStatus } from '../../../store/user/selectors';
+import MainPageEmpty from './main-empty';
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
-  const {city, offersList, isDataLoaded, authorizationStatus} = useAppSelector((state) => state);
+  const city = useAppSelector(getCity);
+  const offersList = useAppSelector(getOffers);
+  const isDataLoaded = useAppSelector(getDataLoadedStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
   if(!isDataLoaded){
     return <LoadingPage />;
@@ -32,6 +39,10 @@ function MainPage():JSX.Element{
   };
 
   const currentOffers = offersList.filter((offer) => offer.city === city);
+  if(currentOffers.length === 0){
+    return <MainPageEmpty />;
+  }
+
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
   const authHeader = isAuth ? (
     <nav className="header__nav">
@@ -101,6 +112,5 @@ function MainPage():JSX.Element{
     </div>
   );
 }
-
 
 export default MainPage;

@@ -1,6 +1,15 @@
+import { useAppSelector } from '../../../hooks';
 import Logo from '../logo/logo';
+import { getFavorites } from '../../../store/data-offers/selectors';
+import FavoriteCard from '../favorite-screen/favorite-card';
+import { nanoid } from 'nanoid';
 
 function FavoritesPage():JSX.Element{
+
+  const favorites = useAppSelector(getFavorites);
+
+  favorites.map((favorite) => (<FavoriteCard appartment={favorite} key={nanoid()}/>));
+
   return (
     <div className="page">
       <header className="header">
@@ -40,9 +49,15 @@ function FavoritesPage():JSX.Element{
                     <a className="locations__item-link" href="main.html">
                       <span>Amsterdam</span>
                     </a>
+
+
                   </div>
                 </div>
                 <div className="favorites__places">
+                  {
+                    favorites.map((favorite) =>
+                      <FavoriteCard appartment={favorite} key={nanoid()}/>)
+                  }
                 </div>
               </li>
 

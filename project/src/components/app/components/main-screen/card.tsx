@@ -2,10 +2,10 @@ import {Offer} from '../../../../types/offer';
 import {MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../hooks/index';
 import {MarkerType} from '../../../const';
-import { fillRentList } from '../../../../store/action';
+import { fillRentList } from '../../../../store/data-offers/data-offers';
+import {getOffers} from '../../../../store/data-offers/selectors';
 
 type CardProps = {
-  // appartment : ApiOffer
   appartment : Offer
 }
 
@@ -16,7 +16,7 @@ function SortCards(currentAppartment : Offer, offers : Offer[], index : number){
 
 function CardElement({appartment} : CardProps):JSX.Element{
   const dispatch = useAppDispatch();
-  const {offersList} = useAppSelector((state) => state);
+  const offersList = useAppSelector(getOffers);
 
 
   const currentAppartment = [...offersList].filter((offer) => offer.id === appartment.id)[0];
@@ -25,7 +25,7 @@ function CardElement({appartment} : CardProps):JSX.Element{
   const initialApartment = {...currentAppartment, markerType: MarkerType.DEFAULT};
   const sortedOffers = SortCards(updatedApartment, offersList, index);
   const initialState = SortCards(initialApartment, offersList, index);
-  const mouseHolding = (evt: MouseEvent) => {//
+  const mouseHolding = (evt: MouseEvent) => {
     evt.preventDefault();
     dispatch(fillRentList([...sortedOffers]));
   };

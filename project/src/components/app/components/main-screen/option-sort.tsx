@@ -1,11 +1,13 @@
 import { MouseEvent, useState } from 'react';
-import { changeSortType } from '../../../../store/action';
+import { changeSortType } from '../../../../store/data-offers/data-offers';
+
 import { SortOptions } from '../../../const';
 import { useAppDispatch, useAppSelector} from '../../../../hooks';
 import { currentWordSortBy } from '../../../const';
+import { getSortType } from '../../../../store/switches/selectors';
 
 const OptionSortComponent = () => {
-  const { sortType } = useAppSelector((state) => state);
+  const sortType = useAppSelector(getSortType);
   const dispatch = useAppDispatch();
   const [isFormOpened, setForm] = useState(false);
   const setFormOpened = (e: MouseEvent) => {
@@ -19,7 +21,7 @@ const OptionSortComponent = () => {
   };
 
   const sortByPriceToHigh = (e: MouseEvent) => {
-    e.preventDefault();
+    e.preventDefault();//
     dispatch(changeSortType(SortOptions.PRICE_LOW_TO_HIGH));
   };
 

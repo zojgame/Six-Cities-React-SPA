@@ -55,12 +55,20 @@ export const URL_MARKER_CURRENT =
 export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
-  Hotels = '/hotels'
+  Hotels = '/hotels',
+  Favorite = '/favorite'
 }
 
 export enum HTTP_CODE {
   BAD_REQUEST = 400,
   UNAUTHARIZED = 401,
   NOT_FOUND = 404,
+}
+
+export enum NameSpace {
+  DataOffers = 'DATA_OFFERS',
+  User = 'USER',
+  Switches = 'SWITCHER',
+  DataComments = 'DATA_COMMENTS'
 }
 

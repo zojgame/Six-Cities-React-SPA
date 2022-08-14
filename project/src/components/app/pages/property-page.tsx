@@ -6,10 +6,12 @@ import LoadingPage from '../pages/loading-page';
 import {useParams, useNavigate} from 'react-router-dom';
 import {nanoid} from 'nanoid';
 import {useAppDispatch} from '../../../hooks';
-import {getComments, getNearestOffers, adaptToClient} from '../../../store/api-actions';
+import {getComments, getNearestOffers, adaptToClient, addToFavorite, deleteFavorite, loadFavorites} from '../../../store/api-actions';
 import Reviews from '../components/reviews';
 import {setAnimationLoading, logoutAction} from '../../../store/api-actions';
 import { AppRoute } from '../../const';
+import { getDataLoadedStatus, getOffers, getNearOffers } from '../../../store/data-offers/selectors';
+import {getFavorites} from '../../../store/data-offers/selectors';
 
 type Params = {
   id: string,
@@ -17,29 +19,54 @@ type Params = {
 }
 
 function PropertyPage():JSX.Element {
-
   const { id, city } = useParams<keyof Params>() as Params;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  dispatch(loadFavorites);
   dispatch(getComments(id));
   dispatch(getNearestOffers(id));
 
-  const { offersList, isDataLoaded, nearestOffers } = useAppSelector((state) => state);
+
+  const isDataLoaded = useAppSelector(getDataLoadedStatus);
+  const offersList = useAppSelector(getOffers);
+  const nearestOffers = useAppSelector(getNearOffers);
+  const favorites = useAppSelector(getFavorites);
+
+  const currentOffers = offersList.filter((offer) => offer.city === city);
+  const currentOffer = currentOffers.filter((offer) => offer.id.toString() === id)[0];
+  const isFavorite = favorites.filter((offer) => offer.id === currentOffer.id).length !== 0;
+
   if(!isDataLoaded){
     return <LoadingPage />;
   }
 
-  const currentOffers = offersList.filter((offer) => offer.city === city);
-  const currentOffer = currentOffers.filter((offer) => offer.id.toString() === id)[0];
-
   if(currentOffers.length === 0){
     return (<ErrorPage />);
   }
+
   const handleLogOut = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(setAnimationLoading());
     dispatch(logoutAction());
     navigate(AppRoute.Main);
+  };
+
+
+  const clickFavoriteButton = () => {
+    if(!isFavorite){
+      handleAddToFavorite();
+    }
+    else{
+      handleDeleteFromFavorite();
+    }
+  };
+
+  const handleAddToFavorite = () => {
+    dispatch(addToFavorite(currentOffer.id));
+  };
+
+  const handleDeleteFromFavorite = () => {
+    dispatch(deleteFavorite(currentOffer.id));
   };
 
   const adaptedOffers = adaptToClient(nearestOffers);
@@ -109,7 +136,8 @@ function PropertyPage():JSX.Element {
                   <h1 className="property__name">
                     {currentOffer.title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  {/* <button className="property__bookmark-button button property__bookmark-button--active" type="button" onClick={clickFavoriteButton}> */}
+                  <button className={`property__bookmark-button button ${isFavorite ? 'property__bookmark-button--active' : ''}`} type="button" onClick={clickFavoriteButton}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use href="#icon-bookmark"></use>
                     </svg>

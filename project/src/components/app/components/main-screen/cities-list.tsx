@@ -1,5 +1,6 @@
-import { ApiDispatch } from '../../../../store/state';
-import { changeCity } from '../../../../store/action';
+import { ApiDispatch } from '../../../../types/state';
+import { changeCity } from '../../../../store/switches/switches';
+
 
 type CitiesListProps = {
   city: string,

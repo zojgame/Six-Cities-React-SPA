@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '.';
 import { APIRoute, AuthorizationStatus, MarkerType, AppRoute } from '../components/const';
-import { loadComments, loadOffers, requireAuthorization,
-  setError, redirectToRoute, setLoadingAnimation,
-  loadNearestOffers,
-  sendNewComment } from './action';
+import { loadComments, sendNewComment } from './data-comments/data-comments';
+import { requireAuthorization, setError, setIsProStatus, setUserEmail, setUserName } from './user/user';
+import { redirectToRoute } from './action';
+import { setLoadingAnimation, loadNearestOffers, loadOffers, setFavorites } from './data-offers/data-offers';
 import { api } from '.';
-import { AuthData } from '../types/auth-data';
+import { LoginData} from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { ApiOffer, Offer } from '../types/offer';
@@ -14,7 +14,8 @@ import dayjs from 'dayjs';
 import { errorHandle } from '../services/error-handle';
 import { ApiComment } from '../types/comment';
 import { Comment } from '../types/review';
-// import { nanoid } from '@reduxjs/toolkit';
+import { customAlphabet } from 'nanoid';
+import { setAvatarUrl } from './user/user';
 
 export const setAnimationLoading = createAsyncThunk(
   'main/setLoading',
@@ -22,7 +23,7 @@ export const setAnimationLoading = createAsyncThunk(
     const timeoutAnimation = 300;
     store.dispatch(setLoadingAnimation(false));
     setTimeout(
-      () =>store.dispatch(setLoadingAnimation(true)),
+      () => store.dispatch(setLoadingAnimation(true)),
       timeoutAnimation
     );
   }
@@ -53,15 +54,31 @@ export const fetchOffersAction = createAsyncThunk(
   }
 );
 
+type AuthData = {
+  avatarUrl: string
+  email: string
+  id: number
+  isPro: boolean
+  name: string
+  token: string
+  }
+
 export const checkAuthStatus = createAsyncThunk(
   'user/checkAuth',
   async () => {
+
     try{
-      await api.get(APIRoute.Login);
+      store.dispatch(setLoadingAnimation(false));
+      const { avatarUrl, email, isPro, name } : AuthData = await api.get(APIRoute.Login);
+      store.dispatch(setAvatarUrl(avatarUrl));
+      store.dispatch(setUserEmail(email));
+      store.dispatch(setUserName(name));
+      store.dispatch(setIsProStatus(isPro));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 
     catch(error){
+
       errorHandle(error);
       store.dispatch(redirectToRoute(AppRoute.Login));
     }
@@ -70,7 +87,7 @@ export const checkAuthStatus = createAsyncThunk(
 
 export const loginAction = createAsyncThunk(
   'user/login',
-  async ({login: email, password} : AuthData) => {
+  async ({login: email, password} : LoginData) => {
     try{
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
@@ -89,10 +106,7 @@ export const sendComment = createAsyncThunk(
     try{
       await api.post(`/comments/${hotelId}`, {comment, rating});
       const newComment = CreateNewComment({comment, rating});
-      // const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      // saveToken(token);
       store.dispatch(sendNewComment(newComment));
-      // store.dispatch(redirectToRoute(AppRoute.Main));
     }
     catch(error){
       errorHandle(error);
@@ -101,10 +115,11 @@ export const sendComment = createAsyncThunk(
 );
 
 function CreateNewComment({comment, rating} : {comment: string, rating: number}):Comment{
+  const nanoid = customAlphabet('1234567890', 18);
   const newComment: Comment = {
     comment: comment,
     date: new Date().toISOString(),
-    id: 200,
+    id: parseInt(nanoid(), 2),
     rating: rating,
     user: {
       avatarUrl: 'atl',
@@ -158,7 +173,47 @@ export const getNearestOffers = createAsyncThunk(
 );
 
 
-//data adapter
+export const loadFavorites = createAsyncThunk (
+  'data/favorites',
+  async () => {
+    try{
+      const {data} = await api.get(`${APIRoute.Favorite}`);
+      store.dispatch(setFavorites(data));
+    }
+
+    catch(error){
+      errorHandle(error);
+    }
+  }
+);
+
+export const addToFavorite = createAsyncThunk (
+  'propertyPage/addToFavorite',
+  async (hotelId : string) => {
+    try{
+      await api.post(`${APIRoute.Favorite}/${hotelId}/1`);
+      store.dispatch(loadFavorites());
+    }
+    catch(error){
+      errorHandle(error);
+    }
+  }
+);
+
+export const deleteFavorite = createAsyncThunk (
+  'propertyPage/addToFavorite',
+  async (hotelId : string) => {
+    try{
+      await api.post(`${APIRoute.Favorite}/${hotelId}/0`);
+      store.dispatch(loadFavorites());
+    }
+    catch(error){
+      errorHandle(error);
+    }
+  }
+);
+
+
 export const adaptToClient = (receivedOffers: ApiOffer[]) : Offer[] => {
   const mockComments = [
     {description: `A quiet cozy and picturesque that hides behind a a river

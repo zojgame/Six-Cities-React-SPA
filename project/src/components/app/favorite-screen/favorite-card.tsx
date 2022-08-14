@@ -1,6 +1,6 @@
 import {Offer} from '../../../types/offer';
 type FavoriteCardProps = {
-    appartment : Offer
+  appartment : Offer
 }
 
 function FavoriteCard({appartment} : FavoriteCardProps):JSX.Element{
@@ -12,7 +12,7 @@ function FavoriteCard({appartment} : FavoriteCardProps):JSX.Element{
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="main.html">
-          <img className="place-card__image" src={appartment.pictures[0]} width="150" height="110" alt="Place" />
+          <img className="place-card__image" src={appartment.previewImage} width="150" height="110" alt="Place" />
         </a>
       </div>
       <div className="favorites__card-info place-card__info">

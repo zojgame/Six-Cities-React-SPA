@@ -1,4 +1,4 @@
-export type AuthData = {
+export type LoginData = {
     login: string,
     password: string
 }

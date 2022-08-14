@@ -1,13 +1,13 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import {store} from './store';
-import { fetchOffersAction } from './store/api-actions';
+import { fetchOffersAction, loadFavorites } from './store/api-actions';
 import ErrorMessageComponent from './components/error-message/error-message';
 import {createRoot} from 'react-dom/client';
 
 store.dispatch(fetchOffersAction());
+store.dispatch(loadFavorites());
 
 const container = createRoot(document.getElementById('root'));
 container.render(

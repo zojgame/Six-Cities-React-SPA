@@ -2,7 +2,7 @@ import { HTTP_CODE } from '../components/const';
 import { ErrorType } from '../types/error-type';
 import request from 'axios';
 import { store } from '../store';
-import { setError } from '../store/action';
+import { setError } from '../store/user/user';
 import { clearErrorAction } from '../store/api-actions';
 
 export const errorHandle = (error: ErrorType): void => {

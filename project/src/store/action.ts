@@ -1,28 +1,5 @@
+
 import { createAction } from '@reduxjs/toolkit';
-import {Offers} from '../types/offer';
-import { AuthorizationStatus, AppRoute } from '../components/const';
-import {Comment} from '../types/review';
-import { ApiOffer } from '../types/offer';
-
-
-export const changeCity = createAction<string>('main/changeCity');
-
-export const fillRentList = createAction<Offers>('main/fillRentList');
-
-export const changeSortType = createAction<string>('main/changeSortType');
-
-export const loadOffers = createAction<Offers>('main/loadOffers');
-
-export const loadComments = createAction<Comment[]>('propertyPage/loadComments');
-
-export const loadNearestOffers = createAction<ApiOffer[]>('propertyPage/loadNearestOffers');
-
-export const requireAuthorization = createAction<AuthorizationStatus>('login/requireAuthorization');
-
-export const setError = createAction<string>('game/setError');
+import { AppRoute } from '../components/const';
 
 export const redirectToRoute = createAction<AppRoute>('loginPage/redirectToRoute');
-
-export const setLoadingAnimation = createAction<boolean>('main/setLoadingAnimation');
-
-export const sendNewComment = createAction<Comment>('propertyPage/sendNewComment');

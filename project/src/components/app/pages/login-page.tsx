@@ -3,7 +3,7 @@ import Logo from '../logo/logo';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../../hooks';
 import {loginAction} from '../../../store/api-actions';
-import {AuthData} from '../../../types/auth-data';
+import {LoginData} from '../../../types/auth-data';
 
 function LoginPage():JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -11,7 +11,7 @@ function LoginPage():JSX.Element{
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = (authData: AuthData) => {
+  const onSubmit = (authData: LoginData) => {
     dispatch(loginAction(authData));
   };
 
@@ -19,7 +19,7 @@ function LoginPage():JSX.Element{
     evt.preventDefault();
 
     if(emailRef.current !== null && passwordRef.current !== null){
-      const authData : AuthData = {
+      const authData : LoginData = {
         login: emailRef.current.value,
         password: passwordRef.current.value
       };

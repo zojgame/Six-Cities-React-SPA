@@ -2,13 +2,15 @@ import {useAppSelector} from '../../../hooks/index';
 import { nanoid } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 import ReviewComponent from './review-form';
+import {getComments} from '../../../store/data-comments/selectors';
 
 type ReviesProps = {
   hotelId: string
 }
 
-function Reviews({hotelId} : ReviesProps):JSX.Element{
-  const {comments} = useAppSelector((state) => state);
+function Reviews({hotelId} : ReviesProps):JSX.Element{//
+  // const {comments} = useAppSelector((state) => state);
+  const comments = useAppSelector(getComments);
 
   const reviews = comments.map((review) =>
     (
