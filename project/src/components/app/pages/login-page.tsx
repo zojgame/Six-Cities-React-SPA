@@ -2,7 +2,7 @@
 import Logo from '../logo/logo';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../../hooks';
-import {loginAction} from '../../../store/api-actions';
+import { loginAction} from '../../../store/api-actions';
 import {LoginData} from '../../../types/auth-data';
 
 function LoginPage():JSX.Element{
@@ -28,7 +28,7 @@ function LoginPage():JSX.Element{
     }
   };
   return (
-    <body>
+    <div>
       <div style={{display: 'none'}}>
         <svg xmlns="http://www.w3.org/2000/svg">
           <symbol id="icon-arrow-select" viewBox="0 0 7 4">
@@ -95,7 +95,7 @@ function LoginPage():JSX.Element{
           </div>
         </main>
       </div>
-    </body>
+    </div>
   );
 }
 

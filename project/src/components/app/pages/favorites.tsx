@@ -3,11 +3,13 @@ import Logo from '../logo/logo';
 import { getFavorites } from '../../../store/data-offers/selectors';
 import FavoriteCard from '../favorite-screen/favorite-card';
 import { nanoid } from 'nanoid';
+import {store} from '../../../store';
+import {loadFavorites} from '../../../store/api-actions';
+
 
 function FavoritesPage():JSX.Element{
-
+  store.dispatch(loadFavorites());
   const favorites = useAppSelector(getFavorites);
-
   favorites.map((favorite) => (<FavoriteCard appartment={favorite} key={nanoid()}/>));
 
   return (

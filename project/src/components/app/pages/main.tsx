@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Map from '../components/map';
 import CardsListComponent from '../components/main-screen/card-list';
@@ -15,6 +16,7 @@ import { getCity } from '../../../store/switches/selectors';
 import { getDataLoadedStatus, getOffers } from '../../../store/data-offers/selectors';
 import { getAuthorizationStatus } from '../../../store/user/selectors';
 import MainPageEmpty from './main-empty';
+import { getEmail } from '../../../store/user/selectors';
 
 function MainPage():JSX.Element{
   const dispatch = useAppDispatch();
@@ -22,6 +24,7 @@ function MainPage():JSX.Element{
   const offersList = useAppSelector(getOffers);
   const isDataLoaded = useAppSelector(getDataLoadedStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const email = useAppSelector(getEmail);
   const navigate = useNavigate();
   if(!isDataLoaded){
     return <LoadingPage />;
@@ -44,6 +47,8 @@ function MainPage():JSX.Element{
   }
 
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
+
+
   const authHeader = isAuth ? (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -51,7 +56,7 @@ function MainPage():JSX.Element{
           <a className="header__nav-link header__nav-link--profile" href="http://localhost:3000">
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+            <span className="header__user-name user__name">{email}</span>
           </a>
         </li>
         <li className="header__nav-item">

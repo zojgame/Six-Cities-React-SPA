@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '.';
 import { APIRoute, AuthorizationStatus, MarkerType, AppRoute } from '../components/const';
@@ -54,31 +55,46 @@ export const fetchOffersAction = createAsyncThunk(
   }
 );
 
-type AuthData = {
-  avatarUrl: string
-  email: string
-  id: number
-  isPro: boolean
-  name: string
-  token: string
-  }
+// type AuthData = {
+//   avatarUrl: string
+//   email: string
+//   id: number
+//   isPro: boolean
+//   name: string
+//   token: string
+//   }
+
+// export const getUserData = createAsyncThunk(
+//   'user/getData',
+//   async () => {
+//     try {
+//       const {data} = await api.get(APIRoute.Login);
+
+//       // const { avatarUrl, email, isPro, name } : AuthData = await api.get(APIRoute.Login);
+//       // store.dispatch(setAvatarUrl(avatarUrl));
+//       // store.dispatch(setUserEmail(email));
+//       // store.dispatch(setUserName(name));
+//       // store.dispatch(setIsProStatus(isPro));
+//     }
+
+//     catch(error){
+//       errorHandle(error);
+//       store.dispatch(redirectToRoute(AppRoute.Login));
+//     }
+//   }
+// );
 
 export const checkAuthStatus = createAsyncThunk(
   'user/checkAuth',
   async () => {
 
-    try{
+    try {
       store.dispatch(setLoadingAnimation(false));
-      const { avatarUrl, email, isPro, name } : AuthData = await api.get(APIRoute.Login);
-      store.dispatch(setAvatarUrl(avatarUrl));
-      store.dispatch(setUserEmail(email));
-      store.dispatch(setUserName(name));
-      store.dispatch(setIsProStatus(isPro));
+      await api.get(APIRoute.Login);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 
     catch(error){
-
       errorHandle(error);
       store.dispatch(redirectToRoute(AppRoute.Login));
     }
@@ -91,8 +107,10 @@ export const loginAction = createAsyncThunk(
     try{
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
+      store.dispatch(setUserEmail(email));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Main));
+
     }
     catch(error){
       errorHandle(error);
