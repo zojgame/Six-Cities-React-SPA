@@ -16,7 +16,6 @@ import { errorHandle } from '../services/error-handle';
 import { ApiComment } from '../types/comment';
 import { Comment } from '../types/review';
 import { customAlphabet } from 'nanoid';
-import { setAvatarUrl } from './user/user';
 
 export const setAnimationLoading = createAsyncThunk(
   'main/setLoading',
@@ -55,37 +54,8 @@ export const fetchOffersAction = createAsyncThunk(
   }
 );
 
-// type AuthData = {
-//   avatarUrl: string
-//   email: string
-//   id: number
-//   isPro: boolean
-//   name: string
-//   token: string
-//   }
-
-// export const getUserData = createAsyncThunk(
-//   'user/getData',
-//   async () => {
-//     try {
-//       const {data} = await api.get(APIRoute.Login);
-
-//       // const { avatarUrl, email, isPro, name } : AuthData = await api.get(APIRoute.Login);
-//       // store.dispatch(setAvatarUrl(avatarUrl));
-//       // store.dispatch(setUserEmail(email));
-//       // store.dispatch(setUserName(name));
-//       // store.dispatch(setIsProStatus(isPro));
-//     }
-
-//     catch(error){
-//       errorHandle(error);
-//       store.dispatch(redirectToRoute(AppRoute.Login));
-//     }
-//   }
-// );
-
-export const checkAuthStatus = createAsyncThunk(
-  'user/checkAuth',
+export const getUserData = createAsyncThunk(
+  'user/getData',
   async () => {
 
     try {
@@ -93,6 +63,26 @@ export const checkAuthStatus = createAsyncThunk(
       const {email, name} = data;
       store.dispatch(setUserEmail(email));
       store.dispatch(setUserName(name));
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    }
+
+    catch(error){
+      // eslint-disable-next-line no-console
+      console.log('unAuthorized');
+    }
+  }
+);
+
+export const checkAuthStatus = createAsyncThunk(
+  'user/checkAuth',
+  async () => {
+
+    try {
+      // const {data} = await api.get(APIRoute.Login);
+      await api.get(APIRoute.Login);
+      // const {email, name} = data;
+      // store.dispatch(setUserEmail(email));
+      // store.dispatch(setUserName(name));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 

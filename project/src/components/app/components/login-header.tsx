@@ -5,13 +5,13 @@ import { AuthorizationStatus } from '../../const';
 import { AppRoute } from '../../const';
 import { setAnimationLoading, logoutAction } from '../../../store/api-actions';
 import { getEmail } from '../../../store/user/selectors';
-import { checkAuthStatus } from '../../../store/api-actions';
+import { getUserData } from '../../../store/api-actions';
 
 export function LoginHeaderComponent():JSX.Element{
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuth = authorizationStatus === AuthorizationStatus.Auth;
   const dispatch = useAppDispatch();
-  dispatch(checkAuthStatus());
+  dispatch(getUserData());
   const navigate = useNavigate();
   const email = useAppSelector(getEmail);
 
