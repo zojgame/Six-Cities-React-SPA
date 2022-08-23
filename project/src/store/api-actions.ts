@@ -90,8 +90,9 @@ export const checkAuthStatus = createAsyncThunk(
 
     try {
       const {data} = await api.get(APIRoute.Login);
-      const {email} = data;
+      const {email, name} = data;
       store.dispatch(setUserEmail(email));
+      store.dispatch(setUserName(name));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 
@@ -121,10 +122,10 @@ export const loginAction = createAsyncThunk(
 
 export const sendComment = createAsyncThunk(
   'user/login',
-  async ({comment, rating, hotelId} : ApiComment) => {
+  async ({comment, rating, hotelId, userName} : ApiComment) => {
     try{
       await api.post(`/comments/${hotelId}`, {comment, rating});
-      const newComment = CreateNewComment({comment, rating});
+      const newComment = CreateNewComment({comment, rating, userName});
       store.dispatch(sendNewComment(newComment));
     }
     catch(error){
@@ -133,7 +134,7 @@ export const sendComment = createAsyncThunk(
   }
 );
 
-function CreateNewComment({comment, rating} : {comment: string, rating: number}):Comment{
+function CreateNewComment({comment, rating, userName} : {comment: string, rating: number, userName: string}):Comment{
   const nanoid = customAlphabet('1234567890', 18);
   const newComment: Comment = {
     comment: comment,
@@ -144,7 +145,7 @@ function CreateNewComment({comment, rating} : {comment: string, rating: number})
       avatarUrl: 'atl',
       id: 200,
       isPro: false,
-      name: 'Danil'
+      name: userName
     }
   };
 

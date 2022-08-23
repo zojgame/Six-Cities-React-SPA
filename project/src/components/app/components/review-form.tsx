@@ -1,8 +1,9 @@
 import {useState } from 'react';
 import {ApiComment} from '../../../types/comment';
 import {sendComment} from '../../../store/api-actions';
-import {useAppDispatch} from '../../../hooks/index';
+import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import {FormEvent} from 'react';
+import { getName } from '../../../store/user/selectors';
 
 type ReviewComponentProps = {
     hotelId: string
@@ -12,7 +13,7 @@ function ReviewComponent({hotelId} : ReviewComponentProps):JSX.Element{
   const [comment, changeComment] = useState('');
   const [stars, changeStars] = useState(0);
   const dispatch = useAppDispatch();
-
+  const userName = useAppSelector(getName);
 
   const handleChange = (evt : React.ChangeEvent<HTMLTextAreaElement>) => {
     changeComment(evt.currentTarget.value);
@@ -23,7 +24,8 @@ function ReviewComponent({hotelId} : ReviewComponentProps):JSX.Element{
     const newComment : ApiComment = {
       comment: comment,
       hotelId: hotelId,
-      rating: stars
+      rating: stars,
+      userName : userName
     };
     dispatch(sendComment(newComment));
     clearArea();

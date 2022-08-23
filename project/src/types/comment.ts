@@ -9,5 +9,6 @@ export type Comment = {
 export type ApiComment = {
     comment: string,
     rating: number,
-    hotelId : string
+    hotelId : string,
+    userName: string
 }
