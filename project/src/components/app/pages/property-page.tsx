@@ -3,15 +3,14 @@ import Map from '../components/map';
 import { Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
 import LoadingPage from '../pages/loading-page';
-import {useParams, useNavigate} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {nanoid} from 'nanoid';
 import {useAppDispatch} from '../../../hooks';
 import {getComments, getNearestOffers, adaptToClient, addToFavorite, deleteFavorite, loadFavorites} from '../../../store/api-actions';
 import Reviews from '../components/reviews';
-import {setAnimationLoading, logoutAction} from '../../../store/api-actions';
-import { AppRoute } from '../../const';
 import { getDataLoadedStatus, getOffers, getNearOffers } from '../../../store/data-offers/selectors';
 import {getFavorites} from '../../../store/data-offers/selectors';
+import { LoginHeaderComponent } from '../components/login-header';
 
 type Params = {
   id: string,
@@ -21,7 +20,6 @@ type Params = {
 function PropertyPage():JSX.Element {
   const { id, city } = useParams<keyof Params>() as Params;
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   dispatch(loadFavorites);
   dispatch(getComments(id));
   dispatch(getNearestOffers(id));
@@ -43,13 +41,6 @@ function PropertyPage():JSX.Element {
   if(currentOffers.length === 0){
     return (<ErrorPage />);
   }
-
-  const handleLogOut = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-    evt.preventDefault();
-    dispatch(setAnimationLoading());
-    dispatch(logoutAction());
-    navigate(AppRoute.Main);
-  };
 
 
   const clickFavoriteButton = () => {
@@ -101,22 +92,7 @@ function PropertyPage():JSX.Element {
                   <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
                 </a>
               </div>
-              <nav className="header__nav">
-                <ul className="header__nav-list">
-                  <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#tag">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
-                  </li>
-                  <li className="header__nav-item">
-                    <a className="header__nav-link" href="#tag" onClick={handleLogOut}>
-                      <span className="header__signout">Sign out</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <LoginHeaderComponent />
             </div>
           </div>
         </header>

@@ -5,6 +5,7 @@ import FavoriteCard from '../favorite-screen/favorite-card';
 import { nanoid } from 'nanoid';
 import {store} from '../../../store';
 import {loadFavorites} from '../../../store/api-actions';
+import { LoginHeaderComponent } from '../components/login-header';
 
 
 function FavoritesPage():JSX.Element{
@@ -20,22 +21,7 @@ function FavoritesPage():JSX.Element{
             <div className="header__left">
               <Logo />
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="main.html">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="main.html">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <LoginHeaderComponent />
           </div>
         </div>
       </header>

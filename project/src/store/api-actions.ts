@@ -89,8 +89,9 @@ export const checkAuthStatus = createAsyncThunk(
   async () => {
 
     try {
-      store.dispatch(setLoadingAnimation(false));
-      await api.get(APIRoute.Login);
+      const {data} = await api.get(APIRoute.Login);
+      const {email} = data;
+      store.dispatch(setUserEmail(email));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 
