@@ -48,6 +48,7 @@ export const fetchOffersAction = createAsyncThunk(
       const adaptedData = adaptToClient(data);
       store.dispatch(loadOffers(adaptedData));
     }
+
     catch(error){
       errorHandle(error);
     }
@@ -78,11 +79,7 @@ export const checkAuthStatus = createAsyncThunk(
   async () => {
 
     try {
-      // const {data} = await api.get(APIRoute.Login);
       await api.get(APIRoute.Login);
-      // const {email, name} = data;
-      // store.dispatch(setUserEmail(email));
-      // store.dispatch(setUserName(name));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     }
 

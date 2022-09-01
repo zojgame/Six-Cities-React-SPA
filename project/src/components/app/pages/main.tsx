@@ -4,7 +4,7 @@ import Logo from '../logo/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks/index';
 import CitiesList from '../components/main-screen/cities-list';
 import OptionSortComponent from '../components/main-screen/option-sort';
-import LoadingPage from './loading-page';
+import LoadingPage from './loading-page/loading-page';
 import { getCity } from '../../../store/switches/selectors';
 import { getDataLoadedStatus, getOffers } from '../../../store/data-offers/selectors';
 import MainPageEmpty from './main-empty';

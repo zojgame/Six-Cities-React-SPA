@@ -27,7 +27,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Login}
-          element={<LoginPage />}
+          element={<LoginPage/>}
         />
         <Route
           path={AppRoute.Favorites}

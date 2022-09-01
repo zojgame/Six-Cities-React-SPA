@@ -2,7 +2,7 @@ import ErrorPage from './error-page';
 import Map from '../components/map';
 import { Offer } from '../../../types/offer';
 import { useAppSelector } from '../../../hooks';
-import LoadingPage from '../pages/loading-page';
+import LoadingPage from './loading-page/loading-page';
 import {useParams} from 'react-router-dom';
 import {nanoid} from 'nanoid';
 import {useAppDispatch} from '../../../hooks';
@@ -112,7 +112,7 @@ function PropertyPage():JSX.Element {
                   <h1 className="property__name">
                     {currentOffer.title}
                   </h1>
-                  {/* <button className="property__bookmark-button button property__bookmark-button--active" type="button" onClick={clickFavoriteButton}> */}
+
                   <button className={`property__bookmark-button button ${isFavorite ? 'property__bookmark-button--active' : ''}`} type="button" onClick={clickFavoriteButton}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use href="#icon-bookmark"></use>

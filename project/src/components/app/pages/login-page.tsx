@@ -4,7 +4,11 @@ import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../../hooks';
 import { loginAction} from '../../../store/api-actions';
 import {LoginData} from '../../../types/auth-data';
+import { AppRoute } from '../../const';
 
+// type LoginPageProps = {
+//   redirectedRoute: AppRoute
+// }
 function LoginPage():JSX.Element{
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -21,12 +25,13 @@ function LoginPage():JSX.Element{
     if(emailRef.current !== null && passwordRef.current !== null){
       const authData : LoginData = {
         login: emailRef.current.value,
-        password: passwordRef.current.value
+        password: passwordRef.current.value,
       };
 
       onSubmit(authData);
     }
   };
+
   return (
     <div>
       <div style={{display: 'none'}}>
